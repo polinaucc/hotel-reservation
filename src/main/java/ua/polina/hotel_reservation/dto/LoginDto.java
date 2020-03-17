@@ -7,11 +7,11 @@ import javax.validation.constraints.Size;
 
 @Data
 public class LoginDto {
-    @NotBlank
-    @Size(min=5, max=20)
+    @NotBlank(message = "The field must not be blank")
+    @Size(min=5, max=20, message = "Username size must be in the range from 5 to 20 characters")
     private String username;
 
-    @NotBlank
-    @Size(min = 5, max = 20)
+    @NotBlank(message = "The field must not be blank")
+    @Size(min = 5, max = 20, message = "Password size must be in the range from 5 to 20 characters")
     private String password;
 }
