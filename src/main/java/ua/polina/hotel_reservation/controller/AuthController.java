@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ua.polina.hotel_reservation.dto.SignUpDto;
-import ua.polina.hotel_reservation.entity.Client;
+import ua.polina.hotel_reservation.exception.DataExistsException;
 import ua.polina.hotel_reservation.service.ClientService;
 
 import javax.validation.Valid;
@@ -26,8 +26,8 @@ public class AuthController {
 
     @GetMapping("/sign-up")
     public String getRegisterPage(Model model) {
-        System.out.println("--------------HEY_____________");
         model.addAttribute("signUp", new SignUpDto());
+        model.addAttribute("error", null);
         return "register-client";
     }
 
@@ -35,11 +35,16 @@ public class AuthController {
     public String registerClient(@Valid @ModelAttribute("signUp") SignUpDto signUpDto,
                                  BindingResult bindingResult,
                                  Model model) {
-        System.out.println("----------------------------OK------------------------------");
         if (bindingResult.hasErrors()) {
             return "register-client";
         }
-        clientService.saveNewClient(signUpDto);
-        return "register-client";
+        try{
+            clientService.saveNewClient(signUpDto);
+            return "register-client";
+        }
+        catch(DataExistsException ex){
+            model.addAttribute("error", ex.getMessage());
+            return  "register-client";
+        }
     }
 }

@@ -10,6 +10,9 @@
     <section id="content">
         <form th:action="@{/auth/sign-up}" th:object="${signUp}" method="post">
             <h1>Registration form</h1>
+            <div th:if="${error != null}">
+                <p th:text="${error}">...</p>
+            </div>
             <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
             <div>
                 <input type="text" placeholder="Email" required="" id="email" th:field="*{email}"/>

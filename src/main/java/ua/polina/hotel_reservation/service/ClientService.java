@@ -7,6 +7,7 @@ import ua.polina.hotel_reservation.dto.SignUpDto;
 import ua.polina.hotel_reservation.entity.Client;
 import ua.polina.hotel_reservation.entity.Role;
 import ua.polina.hotel_reservation.entity.User;
+import ua.polina.hotel_reservation.exception.DataExistsException;
 import ua.polina.hotel_reservation.repository.ClientRepository;
 import ua.polina.hotel_reservation.repository.UserRepository;
 
@@ -32,16 +33,10 @@ public class ClientService {
 
     @Transactional
     public Client saveNewClient(SignUpDto signUpDto) {
-        User user = new User();
+        User user = saveUser(signUpDto);
 
-        HashSet<Role> roles = new HashSet<>();
-        roles.add(Role.CLIENT);
-        user.setAuthorities(roles);
-        user.setUsername(signUpDto.getUsername());
-        user.setEmail(signUpDto.getEmail());
-        user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
-
-        userRepository.save(user);
+        if (clientRepository.existsClientByPassport(signUpDto.getPassport()))
+            throw new DataExistsException("Passport " + signUpDto.getPassport() + " already exists");
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -55,6 +50,23 @@ public class ClientService {
                 .build();
 
         return clientRepository.save(client);
+    }
 
+    private User saveUser(SignUpDto signUpDto) {
+        User user = new User();
+
+        if(userRepository.existsUserByEmail(signUpDto.getEmail()))
+            throw new DataExistsException("Email " + signUpDto.getEmail() + " already exists");
+        if(userRepository.existsUserByUsername(signUpDto.getUsername()))
+            throw new DataExistsException("Username " + signUpDto.getUsername() + " already exists");
+
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(Role.CLIENT);
+        user.setAuthorities(roles);
+        user.setUsername(signUpDto.getUsername());
+        user.setEmail(signUpDto.getEmail());
+        user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
+
+        return userRepository.save(user);
     }
 }
