@@ -1,14 +1,13 @@
 package ua.polina.hotel_reservation.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ua.polina.hotel_reservation.dto.SignUpDto;
+import ua.polina.hotel_reservation.entity.Role;
 import ua.polina.hotel_reservation.exception.DataExistsException;
 import ua.polina.hotel_reservation.service.ClientService;
 
@@ -38,13 +37,34 @@ public class AuthController {
         if (bindingResult.hasErrors()) {
             return "register-client";
         }
-        try{
+        try {
             clientService.saveNewClient(signUpDto);
+            return "redirect:/auth/login";
+        } catch (DataExistsException ex) {
+            model.addAttribute("error", ex.getMessage());
             return "register-client";
         }
-        catch(DataExistsException ex){
-            model.addAttribute("error", ex.getMessage());
-            return  "register-client";
+    }
+
+    @RequestMapping("/login")
+    public String getLogin(
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String logout,
+            Model model) {
+        model.addAttribute("error", error);
+        model.addAttribute("logout", logout);
+        return "login";
+    }
+
+    @RequestMapping("/default-success")
+    public String getSuccessPage(Model model) {
+        if (SecurityContextHolder.getContext().getAuthentication()
+                .getAuthorities().contains(Role.ADMIN)) {
+            return "redirect:/auth/sign-up";
+        } else if (SecurityContextHolder.getContext().getAuthentication()
+                .getAuthorities().contains(Role.CLIENT)) {
+            return "index";
         }
+        return "index";
     }
 }
