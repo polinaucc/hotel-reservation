@@ -15,6 +15,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -68,5 +69,9 @@ public class ClientService {
         user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
 
         return userRepository.save(user);
+    }
+
+    public Optional<Client> getClientByUser(User user){
+        return clientRepository.findClientByUser(user);
     }
 }

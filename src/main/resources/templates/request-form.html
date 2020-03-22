@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/logIn.css}">
+    <title>Request</title>
+</head>
+<body>
+<div class="container">
+    <section id="content">
+        <form th:action="@{/client/apply}" th:object="${request}" method="post">
+            <h1>Request form</h1>
+            <div th:if="${error != null}">
+                <p th:text="${error}">...</p>
+            </div>
+            <div class="col-lg-6">
+                <select class="form-control" id="roomType" name="roomType" th:field="*{roomType}">
+                    <option value="">Select appartment class</option>
+                    <option th:each="roomOpt : ${T(ua.polina.hotel_reservation.entity.RoomType).values()}"
+                            th:value="${roomOpt}" th:text="${roomOpt.displayValue}"></option>
+                </select>
+            </div>
+            <div class="col-lg-6">
+                <select class="form-control" id="countOfPersons" name="persons" th:field="*{countOfPerson}">
+                    <option th:each="person : ${counts}"
+                            th:value="${person}" th:text="${person}"></option>
+                </select>
+            </div>
+            <div class="col-lg-6">
+                <select class="form-control" id="countOfBeds" name="beds" th:field="*{countOfBeds}">
+                    <option th:each="bed : ${counts}"
+                            th:value="${bed}" th:text="${bed}"></option>
+                </select>
+            </div>
+            <div th:if="${#fields.hasErrors('checkInDate')}" th:errors="*{checkInDate}">CheckInDate Error</div>
+            <div>
+                <input type="date" placeholder="CheckInDate" required="" id="checkInDate"
+                       th:field="*{{checkInDate}}" pattern="dd-MM-yyyy"/>
+            </div>
+            <div th:if="${#fields.hasErrors('checkOutDate')}" th:errors="*{checkOutDate}">CheckOutDate Error</div>
+            <div>
+                <input type="date" placeholder="CheckOutDate" required="" id="checkOutDate"
+                       th:field="*{{checkOutDate}}" pattern="dd-MM-yyyy"/>
+            </div>
+            <input type="submit" value="Sign up"/>
+        </form>
+    </section>
+</div>
+</body>
+</html>
