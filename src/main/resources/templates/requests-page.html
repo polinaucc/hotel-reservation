@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Requests</title>
+    <style>
+        table {
+            width: 100%;
+        }
+
+        table td, table th {
+            border: 1px solid grey;
+        }
+
+        table th {
+            background: #eee;
+        }
+
+        .pagination-div span {
+            border-radius: 3px;
+            border: 1px solid #999;
+            padding: 5px;
+            margin: 10px 0px 0px 10px;
+            display: inline-block
+        }
+    </style>
+</head>
+<body>
+<h2>Requests</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Request id</th>
+        <th>Client</th>
+        <th>Room type</th>
+        <th>Count of persons</th>
+        <th>Count of beds</th>
+        <th>Check in date</th>
+        <th>Check out date</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="request, iStat : ${requestPage.content}"
+        th:style="${iStat.odd}? 'font-weight: bold;'"
+        th:alt-title="${iStat.even}? 'even' : 'odd'">
+        <td th:text="${request.id}"></td>
+        <td th:text="${request.client.toString()}"></td>
+        <td th:text="${request.description.roomType}"></td>
+        <td th:text="${request.description.countOfPersons}"></td>
+        <td th:text="${request.description.countOfBeds}"></td>
+        <td th:text="${request.checkInDate}"></td>
+        <td th:text="${request.checkOutDate}"></td>
+        <td th:text="${request.status}"></td>
+        <td><a th:href="@{/admin/find-room/{id}(id=${request.id})}">Find room</a></td>
+
+    </tr>
+    </tbody>
+</table>
+
+
+<div th:if="${requestPage.totalPages > 0}" class="pagination"
+     th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/admin/requests(size=${requestPage.size}, page=${pageNumber})}"
+       th:text=${pageNumber}
+       th:class="${pageNumber==requestPage.number + 1} ? active"></a>
+</div>
+</body>
+</html>

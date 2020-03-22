@@ -44,4 +44,8 @@ public class Client {
     @OneToMany(mappedBy = "client")
     private Set<Request> requests;
 
+    @Override
+    public String toString() {
+        return firstName + " " + middleName + " " + lastName;
+    }
 }

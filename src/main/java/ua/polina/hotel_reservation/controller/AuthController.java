@@ -60,7 +60,7 @@ public class AuthController {
     public String getSuccessPage(Model model) {
         if (SecurityContextHolder.getContext().getAuthentication()
                 .getAuthorities().contains(Role.ADMIN)) {
-            return "redirect:/admin/add-description";
+            return "redirect:/admin/requests";
         } else if (SecurityContextHolder.getContext().getAuthentication()
                 .getAuthorities().contains(Role.CLIENT)) {
             return "redirect:/client/apply";
