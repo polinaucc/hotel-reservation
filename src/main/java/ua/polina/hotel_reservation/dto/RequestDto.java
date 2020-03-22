@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import ua.polina.hotel_reservation.entity.RoomType;
 
 import javax.validation.constraints.Future;
@@ -17,7 +18,10 @@ public class RequestDto {
     private RoomType roomType;
     private int countOfPerson;
     private int countOfBeds;
-    //TODO: check date if it is future
-    private String checkInDate;
-    private String checkOutDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Future
+    private LocalDate checkInDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Future
+    private LocalDate checkOutDate;
 }

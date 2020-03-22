@@ -11,6 +11,7 @@ import ua.polina.hotel_reservation.repository.RequestRepository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Service
 public class RequestService {
@@ -22,12 +23,11 @@ public class RequestService {
     }
 
     public Request saveNewRequest(RequestDto requestDto, Client client, Description description) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Request request = Request.builder()
                 .client(client)
                 .description(description)
-                .checkInDate(LocalDate.parse(requestDto.getCheckInDate(), formatter))
-                .checkOutDate(LocalDate.parse(requestDto.getCheckInDate(), formatter))
+                .checkInDate(requestDto.getCheckInDate())
+                .checkOutDate(requestDto.getCheckOutDate())
                 .status(Status.New_request)
                 .build();
         return  requestRepository.save(request);

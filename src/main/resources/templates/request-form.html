@@ -34,12 +34,12 @@
             </div>
             <div th:if="${#fields.hasErrors('checkInDate')}" th:errors="*{checkInDate}">CheckInDate Error</div>
             <div>
-                <input type="date" placeholder="CheckInDate" required="" id="checkInDate"
+                <input type="date" placeholder="CheckInDate" required="" id="checkInDate" th:value="*{checkInDate}"
                        th:field="*{{checkInDate}}" pattern="dd-MM-yyyy"/>
             </div>
             <div th:if="${#fields.hasErrors('checkOutDate')}" th:errors="*{checkOutDate}">CheckOutDate Error</div>
             <div>
-                <input type="date" placeholder="CheckOutDate" required="" id="checkOutDate"
+                <input type="date" placeholder="CheckOutDate" required="" id="checkOutDate" th:value="*{checkOutDate}"
                        th:field="*{{checkOutDate}}" pattern="dd-MM-yyyy"/>
             </div>
             <input type="submit" value="Sign up"/>

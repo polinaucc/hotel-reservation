@@ -51,7 +51,7 @@ public class ClientController {
     }
 
     @PostMapping("/apply")
-    public String addRequest(@ModelAttribute RequestDto requestDto, Model model,
+    public String addRequest(@ModelAttribute("request") RequestDto requestDto, Model model,
                              BindingResult bindingResult, @CurrentUser User user) {
         System.out.println("--------------HERE---------------");
         if (bindingResult.hasErrors()) {
@@ -63,11 +63,14 @@ public class ClientController {
                     .orElseThrow(() -> new IllegalArgumentException("No client"));
             Description description = descriptionService.getDescriptionByParameters(requestDto)
                     .orElseThrow(() -> new IllegalArgumentException("No rooms with such parameters"));
+            if(requestDto.getCheckOutDate().isBefore(requestDto.getCheckInDate())){
+                throw new IllegalArgumentException("Check out date must be after check in date");
+            }
             requestService.saveNewRequest(requestDto, client, description);
             return "index";
         } catch (IllegalArgumentException ex) {
             model.addAttribute("error", ex.getMessage());
-            return "redirect:/client/apply";
+            return "request-form";
         }
     }
 }
