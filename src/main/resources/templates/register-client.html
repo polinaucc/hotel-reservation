@@ -44,7 +44,7 @@
             </div>
             <div th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">Birthday Error</div>
             <div>
-                <input type="date" placeholder="Birthday" required="" id="birthday" th:field="*{{birthday}}" pattern="dd-MM-yyyy"/>
+                <input type="date" placeholder="Birthday" required="" id="birthday"  th:value="*{birthday}" th:field="*{birthday}" pattern="dd-MM-yyyy"/>
             </div>
             <div>
                 <input type="submit" value="Sign up"/>

@@ -1,8 +1,10 @@
 package ua.polina.hotel_reservation.dto;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 
 @Data
 public class SignUpDto {
@@ -35,5 +37,7 @@ public class SignUpDto {
     @Pattern(regexp = "^[А-Я]{2}[0-9]{6}$", message = "Illegal passport!")
     private String passport;
 
-    private String birthday;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Past
+    private LocalDate birthday;
 }

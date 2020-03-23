@@ -87,6 +87,7 @@ public class AdminController {
         return "requests-page";
     }
 
+    //TODO: check if room is already booked
     @RequestMapping("/find-room/{id}")
     public String findRoom(@PathVariable("id") Long requestId, Model model) {
         Request request = requestService.getRequestById(requestId)

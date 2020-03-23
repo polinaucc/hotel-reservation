@@ -39,14 +39,12 @@ public class ClientService {
         if (clientRepository.existsClientByPassport(signUpDto.getPassport()))
             throw new DataExistsException("Passport " + signUpDto.getPassport() + " already exists");
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
         Client client = Client.builder()
                 .firstName(signUpDto.getFirstName())
                 .middleName(signUpDto.getMiddleName())
                 .lastName(signUpDto.getLastName())
                 .passport(signUpDto.getPassport())
-                .birthday(LocalDate.parse(signUpDto.getBirthday(), formatter))
+                .birthday(signUpDto.getBirthday())
                 .user(user)
                 .build();
 
@@ -56,9 +54,9 @@ public class ClientService {
     private User saveUser(SignUpDto signUpDto) {
         User user = new User();
 
-        if(userRepository.existsUserByEmail(signUpDto.getEmail()))
+        if (userRepository.existsUserByEmail(signUpDto.getEmail()))
             throw new DataExistsException("Email " + signUpDto.getEmail() + " already exists");
-        if(userRepository.existsUserByUsername(signUpDto.getUsername()))
+        if (userRepository.existsUserByUsername(signUpDto.getUsername()))
             throw new DataExistsException("Username " + signUpDto.getUsername() + " already exists");
 
         HashSet<Role> roles = new HashSet<>();
@@ -71,7 +69,7 @@ public class ClientService {
         return userRepository.save(user);
     }
 
-    public Optional<Client> getClientByUser(User user){
+    public Optional<Client> getClientByUser(User user) {
         return clientRepository.findClientByUser(user);
     }
 }
