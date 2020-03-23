@@ -9,6 +9,7 @@ import ua.polina.hotel_reservation.entity.Room;
 import ua.polina.hotel_reservation.repository.ReservationRepository;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -34,5 +35,9 @@ public class ReservationService {
 
     public Optional<Reservation> getReservationByRequest(Request request){
         return reservationRepository.findByRequest(request);
+    }
+
+    public List<Reservation> getAllReservations(){
+        return reservationRepository.findAll();
     }
 }

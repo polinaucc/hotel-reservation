@@ -37,6 +37,7 @@ public class SignUpDto {
     @Pattern(regexp = "^[А-Я]{2}[0-9]{6}$", message = "Illegal passport!")
     private String passport;
 
+    //TODO:check if person is more than 18 years old
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past
     private LocalDate birthday;
