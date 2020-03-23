@@ -9,6 +9,7 @@ import ua.polina.hotel_reservation.entity.Description;
 import ua.polina.hotel_reservation.entity.RoomType;
 import ua.polina.hotel_reservation.repository.DescriptionRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,5 +39,13 @@ public class DescriptionService {
                 requestDto.getCountOfPerson(),
                 requestDto.getCountOfBeds()
         );
+    }
+
+    public List<Description> getAllDescriptions(){
+        return descriptionRepository.findAll();
+    }
+
+    public Optional<Description> getDescriptionById(Long id){
+        return descriptionRepository.findById(id);
     }
 }

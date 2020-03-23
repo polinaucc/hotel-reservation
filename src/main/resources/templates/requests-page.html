@@ -53,7 +53,9 @@
         <td th:text="${request.checkOutDate}"></td>
         <td th:text="${request.status}"></td>
         <td><a th:href="@{/admin/find-room/{id}(id=${request.id})}">Find room</a></td>
-
+        <td>
+            <a th:href="@{/admin/check-reservation/{id}(id=${request.id})}" th:text="${request.status==T(ua.polina.hotel_reservation.entity.Status).Accepted} ? 'Check reservation':' '">Reservation</a>
+        </td>
     </tr>
     </tbody>
 </table>

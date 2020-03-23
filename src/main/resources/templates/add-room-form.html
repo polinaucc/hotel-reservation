@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/logIn.css}">
+    <title>Add room</title>
+</head>
+<body>
+<div class="container">
+    <section id="content">
+        <form th:action="@{/admin/add-room}" th:object="${newroom}" method="post">
+            <h1>Request form</h1>
+            <div>
+                <input type="text" placeholder="Room number" required="" id="roomNumber" th:field="*{roomNumber}"/>
+            </div>
+            <div class="col-lg-6">
+                <select class="form-control" id="room" th:field="*{descriptionId}">
+                    <option value="">Select description</option>
+                    <option th:each="d : ${descriptions}"
+                            th:value="${d.id}" th:text="${d}"></option>
+                </select>
+            </div>
+            <input type="submit" value="Add"/>
+        </form>
+    </section>
+</div>
+</body>
+</html>

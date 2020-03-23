@@ -41,4 +41,8 @@ public class Description {
     @OneToMany(mappedBy = "description")
     private Set<Room> rooms;
 
+    @Override
+    public String toString() {
+        return roomType + "for " + countOfPersons + " with " + countOfBeds;
+    }
 }

@@ -11,6 +11,8 @@ import ua.polina.hotel_reservation.entity.Request;
 import ua.polina.hotel_reservation.entity.Status;
 import ua.polina.hotel_reservation.repository.RequestRepository;
 
+import java.util.Optional;
+
 @Service
 public class RequestService {
     RequestRepository requestRepository;
@@ -33,5 +35,14 @@ public class RequestService {
 
     public Page<Request> getAllRequests(Pageable pageable){
         return requestRepository.findAll(pageable);
+    }
+
+    public Optional<Request> getRequestById(Long id){
+        return requestRepository.findById(id);
+    }
+
+    public Request update(Request request, Status status){
+        request.setStatus(status);
+        return requestRepository.save(request);
     }
 }

@@ -21,7 +21,7 @@ public class Reservation {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(optional = false, cascade = CascadeType.MERGE, orphanRemoval = true)
     @JoinColumn(name = "request_id", nullable = false)
     private Request request;
 

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Request</title>
+</head>
+<body>
+<div class="container">
+    <section id="content">
+        <form th:action="@{/admin/add-reservation}" th:object="${reservation}" method="post">
+            <h1>Choose room</h1>
+            <div class="col-lg-6">
+                <select class="form-control" id="room" th:field="*{roomId}">
+                    <option value="">Select free room</option>
+                    <option th:each="room : ${rooms}"
+                            th:value="${room.id}" th:text="${room.roomNumber}"></option>
+                </select>
+            </div>
+            <input type="submit" value="Create reservation"/>
+        </form>
+    </section>
+</div>
+</body>
+</html>
