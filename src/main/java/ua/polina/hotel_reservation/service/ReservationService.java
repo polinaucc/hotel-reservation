@@ -9,6 +9,7 @@ import ua.polina.hotel_reservation.entity.Room;
 import ua.polina.hotel_reservation.repository.ReservationRepository;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -29,5 +30,9 @@ public class ReservationService {
                         .multiply(new BigDecimal(DAYS.between(request.getCheckInDate(), request.getCheckOutDate()))))
                 .build();
         return reservationRepository.save(reservation);
+    }
+
+    public Optional<Reservation> getReservationByRequest(Request request){
+        return reservationRepository.findByRequest(request);
     }
 }

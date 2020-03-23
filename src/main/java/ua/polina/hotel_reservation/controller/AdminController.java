@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import ua.polina.hotel_reservation.dto.DescriptionDto;
 import ua.polina.hotel_reservation.dto.ReservationDto;
 import ua.polina.hotel_reservation.dto.RoomDto;
-import ua.polina.hotel_reservation.entity.Description;
-import ua.polina.hotel_reservation.entity.Request;
-import ua.polina.hotel_reservation.entity.Room;
-import ua.polina.hotel_reservation.entity.Status;
+import ua.polina.hotel_reservation.entity.*;
 import ua.polina.hotel_reservation.service.DescriptionService;
 import ua.polina.hotel_reservation.service.RequestService;
 import ua.polina.hotel_reservation.service.ReservationService;
@@ -114,7 +111,7 @@ public class AdminController {
             return "index";
         }
         Room room = roomService.getRoomById(reservationDto.getRoomId())
-                .orElseThrow(()-> new IllegalArgumentException("No such room"));
+                .orElseThrow(() -> new IllegalArgumentException("No such room"));
 
         reservationService.saveReservation(request, room);
 
@@ -139,6 +136,18 @@ public class AdminController {
         roomService.saveRoom(roomDto, description);
 
         return "redirect:/admin/add-room";
+    }
+
+    @GetMapping("check-reservation/{id}")
+    public String getReservationInfo(@PathVariable("id") Long requestId,
+                                     Model model) {
+        Request request = requestService.getRequestById(requestId)
+                .orElseThrow(() -> new IllegalArgumentException("No such request"));
+        Reservation reservation = reservationService.getReservationByRequest(request)
+                .orElseThrow(() -> new IllegalArgumentException("No reservation"));
+        model.addAttribute("reservation", reservation);
+        return "reservation-info";
+
     }
 
 
