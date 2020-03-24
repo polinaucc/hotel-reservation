@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My requests</title>
+    <style>
+        table {
+            width: 100%;
+        }
+
+        table td, table th {
+            border: 1px solid grey;
+        }
+
+        table th {
+            background: #eee;
+        }
+
+        .pagination-div span {
+            border-radius: 3px;
+            border: 1px solid #999;
+            padding: 5px;
+            margin: 10px 0px 0px 10px;
+            display: inline-block
+        }
+
+    </style>
+</head>
+<body>
+<h2>My Requests</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Room type</th>
+        <th>Count of persons</th>
+        <th>Count of beds</th>
+        <th>Check in date</th>
+        <th>Check out date</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="request, iStat : ${requests}"
+        th:style="${iStat.odd}? 'font-weight: bold;'"
+        th:alt-title="${iStat.even}? 'even' : 'odd'">
+        <td th:text="${request.description.roomType}"></td>
+        <td th:text="${request.description.countOfPersons}"></td>
+        <td th:text="${request.description.countOfBeds}"></td>
+        <td th:text="${request.checkInDate}"></td>
+        <td th:text="${request.checkOutDate}"></td>
+        <td th:text="${request.status}"></td>
+        <td>
+            <a th:href="@{/client/check-bill/{id}(id=${request.id})}"
+               th:text="${request.status==T(ua.polina.hotel_reservation.entity.Status).Accepted} ? 'Check bill':' '">Bill</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/client/apply}">Create new request</a>
+</body>
+</html>

@@ -11,6 +11,7 @@ import ua.polina.hotel_reservation.entity.Request;
 import ua.polina.hotel_reservation.entity.Status;
 import ua.polina.hotel_reservation.repository.RequestRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -44,5 +45,9 @@ public class RequestService {
     public Request update(Request request, Status status){
         request.setStatus(status);
         return requestRepository.save(request);
+    }
+
+    public List<Request> getRequestsByClient(Client client){
+        return requestRepository.findRequestByClient(client);
     }
 }

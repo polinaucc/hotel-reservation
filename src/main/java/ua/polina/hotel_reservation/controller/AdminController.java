@@ -87,7 +87,6 @@ public class AdminController {
         return "requests-page";
     }
 
-    //TODO: check if room is already booked
     @RequestMapping("/find-room/{id}")
     public String findRoom(@PathVariable("id") Long requestId, Model model) {
         Request request = requestService.getRequestById(requestId)
@@ -98,18 +97,21 @@ public class AdminController {
 
         List<Reservation> reservations = reservationService.getAllReservations();
 
-        for (Room room: rooms){
-            for(Reservation res: reservations){
-                if(res.getRoom().equals(room) && (request.getCheckInDate().compareTo(res.getRequest().getCheckInDate())>=0 &&
-                        request.getCheckInDate().isBefore(res.getRequest().getCheckOutDate())) ||
-                        (request.getCheckOutDate().compareTo(res.getRequest().getCheckInDate())>=0 &&
-                                request.getCheckOutDate().compareTo(res.getRequest().getCheckOutDate())<=0)){
+        //TODO: for in for is bad practice
+        for (Room room : rooms) {
+            for (Reservation res : reservations) {
+                if (res.getRoom().equals(room) &&
+                        (request.getCheckInDate().compareTo(res.getRequest().getCheckInDate()) >= 0 &&
+                                request.getCheckInDate().isBefore(res.getRequest().getCheckOutDate())) ||
+                        (request.getCheckOutDate().compareTo(res.getRequest().getCheckInDate()) >= 0 &&
+                                request.getCheckOutDate().compareTo(res.getRequest().getCheckOutDate()) <= 0)) {
                     wrongRooms.add(room);
+                    break;
                 }
             }
         }
 
-        for(Room r: wrongRooms){
+        for (Room r : wrongRooms) {
             rooms.remove(r);
         }
 
@@ -167,7 +169,6 @@ public class AdminController {
                 .orElseThrow(() -> new IllegalArgumentException("No reservation"));
         model.addAttribute("reservation", reservation);
         return "reservation-info";
-
     }
 
 
