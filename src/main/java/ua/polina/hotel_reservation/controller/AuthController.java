@@ -67,4 +67,9 @@ public class AuthController {
         }
         return "index";
     }
+
+    @GetMapping("/index")
+    public String getIndexPage(Model model){
+        return "index";
+    }
 }

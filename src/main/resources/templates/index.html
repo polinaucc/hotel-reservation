@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../index.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+<body>
+<header>
+    <ul class="d-inline-flex nav">
+        <li class="nav-item ">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Contacts</a>
+        </li>
+        <li class="nav-item" th:if="${#httpServletRequest.remoteUser==null}">
+            <a class="nav-link" th:href="@{/auth/login}">Log in</a>
+        </li>
+        <li class="nav-item" th:if="${#httpServletRequest.remoteUser==null}">
+            <a class="nav-link" th:href="@{/auth/sign-up}">Register</a>
+        </li>
+    </ul>
+    <!--        Hello, <b th:inline="text"> [[${#httpServletRequest.remoteUser}]] </b>-->
+    <li class="nav-item" th:if="${#httpServletRequest.remoteUser!=null}">
+        <a class="nav-link" th:href="@{/logout}">Log out</a>
+    </li>
+</header>
+</body>
+</html>
