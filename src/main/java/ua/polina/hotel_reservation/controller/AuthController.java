@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.polina.hotel_reservation.dto.SignUpDto;
+import ua.polina.hotel_reservation.entity.CurrentUser;
 import ua.polina.hotel_reservation.entity.Role;
+import ua.polina.hotel_reservation.entity.User;
 import ua.polina.hotel_reservation.exception.DataExistsException;
 import ua.polina.hotel_reservation.service.ClientService;
 
@@ -60,10 +62,10 @@ public class AuthController {
     public String getSuccessPage(Model model) {
         if (SecurityContextHolder.getContext().getAuthentication()
                 .getAuthorities().contains(Role.ADMIN)) {
-            return "redirect:/admin/requests";
+            return "redirect:/admin/index";
         } else if (SecurityContextHolder.getContext().getAuthentication()
                 .getAuthorities().contains(Role.CLIENT)) {
-            return "redirect:/client/apply";
+            return "redirect:/client/index";
         }
         return "index";
     }

@@ -91,4 +91,9 @@ public class ClientController {
         model.addAttribute("reservation", reservation);
         return "reservation-info";
     }
+
+    @GetMapping("/index")
+    public String getIndexPage(Model model){
+        return "client-index";
+    }
 }

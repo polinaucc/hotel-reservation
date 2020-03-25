@@ -9,5 +9,15 @@
 </head>
 <body>
 <th:block th:insert="fragments/header :: header"/>
+<div>
+    <ul class="d-inline-flex nav">
+        <li class="nav-item ">
+            <a class="nav-link" th:href="@{/client/apply}">Form new request<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" th:href="@{/client/my-requests}"> View requests <span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+</div>
 </body>
 </html>

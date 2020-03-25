@@ -171,5 +171,9 @@ public class AdminController {
         return "reservation-info";
     }
 
-
+    @GetMapping("/index")
+    public String getIndexPage(Model model){
+        return "admin-index";
+    }
 }
+
