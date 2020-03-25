@@ -50,18 +50,18 @@ public class AdminController {
                 List.of(1, 2, 3));
 
         model.addAttribute("counts", counts);
-        return "description-form";
+        return "admin/description-form";
     }
 
     @PostMapping("/add-description")
     public String addDescription(@ModelAttribute("description") DescriptionDto descriptionDto, Model model,
                                  BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "index";
+            return "redirect:/admin/index";
         }
         System.out.println(descriptionDto);
         descriptionService.saveNewDescription(descriptionDto);
-        return "redirect:/admin/add-description";
+        return "admin/description-form";
     }
 
     @GetMapping("/requests")
@@ -84,7 +84,7 @@ public class AdminController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
 
-        return "requests-page";
+        return "admin/requests-page";
     }
 
     @RequestMapping("/find-room/{id}")
@@ -122,7 +122,7 @@ public class AdminController {
         if (rooms.size() == 0) requestService.update(request, Status.Rejected);
         else requestService.update(request, Status.Accepted);
 
-        return "find-room";
+        return "admin/find-room";
     }
 
     @PostMapping("/add-reservation")
@@ -144,7 +144,7 @@ public class AdminController {
     public String getRoomForm(Model model) {
         model.addAttribute("newroom", new RoomDto());
         model.addAttribute("descriptions", descriptionService.getAllDescriptions());
-        return "add-room-form";
+        return "admin/add-room-form";
     }
 
     @PostMapping("/add-room")
@@ -173,7 +173,7 @@ public class AdminController {
 
     @GetMapping("/index")
     public String getIndexPage(Model model){
-        return "admin-index";
+        return "admin/admin-index";
     }
 }
 

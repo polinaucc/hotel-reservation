@@ -44,7 +44,7 @@ public class ClientController {
                 List.of(1, 2, 3));
 
         model.addAttribute("counts", counts);
-        return "request-form";
+        return "client/request-form";
     }
 
     @PostMapping("/apply")
@@ -66,7 +66,7 @@ public class ClientController {
             return "index";
         } catch (IllegalArgumentException ex) {
             model.addAttribute("error", ex.getMessage());
-            return "request-form";
+            return "client/request-form";
         }
     }
 
@@ -78,7 +78,7 @@ public class ClientController {
                 .orElseThrow(() -> new IllegalArgumentException("No client"));
         List<Request> requests = requestService.getRequestsByClient(client);
         model.addAttribute("requests", requests);
-        return "my-request";
+        return "client/my-request";
     }
 
     @GetMapping("check-bill/{id}")
@@ -94,6 +94,6 @@ public class ClientController {
 
     @GetMapping("/index")
     public String getIndexPage(Model model){
-        return "client-index";
+        return "client/client-index";
     }
 }
