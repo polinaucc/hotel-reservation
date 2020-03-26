@@ -12,8 +12,6 @@ import ua.polina.hotel_reservation.repository.ClientRepository;
 import ua.polina.hotel_reservation.repository.UserRepository;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Optional;
 
