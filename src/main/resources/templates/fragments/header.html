@@ -3,22 +3,22 @@
 <header th:fragment="header">
     <ul class="d-inline-flex nav">
         <li class="nav-item ">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#" th:text="#{home}">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Contacts</a>
+            <a class="nav-link" href="#" th:text="#{contacts}">Contacts</a>
         </li>
         <li class="nav-item" th:if="${#httpServletRequest.remoteUser==null}">
-            <a class="nav-link" th:href="@{/auth/login}">Log in</a>
+            <a class="nav-link" th:href="@{/auth/login}" th:text="#{login.log.in}">Log in</a>
         </li>
         <li class="nav-item" th:if="${#httpServletRequest.remoteUser==null}">
-            <a class="nav-link" th:href="@{/auth/sign-up}">Register</a>
+            <a class="nav-link" th:href="@{/auth/sign-up}" th:text="#{register}">Register</a>
         </li>
         <li class="nav-item" th:if="${#httpServletRequest.remoteUser!=null}">
-            <a class="nav-link" th:href="@{/logout}">Log out</a>
+            <a class="nav-link" th:href="@{/logout}" th:text="#{log.out}">Log out</a>
         </li>
     </ul>
-    <h2 th:if="${#httpServletRequest.remoteUser!=null}"> Hello, <b th:inline="text"> [[${#httpServletRequest.remoteUser}]] </b></h2>
+    <h2 th:if="${#httpServletRequest.remoteUser!=null}"  th:inline="text"> Hello, [[${#httpServletRequest.remoteUser}]] </h2>
 
 
 </header>

@@ -171,8 +171,9 @@ public class AdminController {
         return "reservation-info";
     }
 
+    //TODO: "HELLO, ADMIN" add localization to th:inline block in html
     @GetMapping("/index")
-    public String getIndexPage(Model model){
+    public String getIndexPage(){
         return "admin/admin-index";
     }
 }

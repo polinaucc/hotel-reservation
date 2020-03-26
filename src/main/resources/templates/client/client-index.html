@@ -5,17 +5,18 @@
     <link rel="stylesheet" type="text/css" href="../index.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Title</title>
+    <title>Client index</title>
 </head>
 <body>
+<th:block th:insert="fragments/language :: language"/>
 <th:block th:insert="fragments/header :: header"/>
 <div>
     <ul class="d-inline-flex nav">
         <li class="nav-item ">
-            <a class="nav-link" th:href="@{/client/apply}">Form new request<span class="sr-only">(current)</span></a>
+            <a class="nav-link" th:href="@{/client/apply}" th:text="#{form.new.request}">Form new request</a>
         </li>
         <li class="nav-item ">
-            <a class="nav-link" th:href="@{/client/my-requests}"> View requests <span class="sr-only">(current)</span></a>
+            <a class="nav-link" th:href="@{/client/my-requests}" th:text="#{view.requests}"> View my requests</a>
         </li>
     </ul>
 </div>

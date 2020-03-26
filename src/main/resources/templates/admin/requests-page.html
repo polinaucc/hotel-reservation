@@ -26,18 +26,19 @@
     </style>
 </head>
 <body>
+<th:block th:insert="fragments/language :: language"/>
 <h2>Requests</h2>
 <table border="1">
     <thead>
     <tr>
-        <th>Request id</th>
-        <th>Client</th>
-        <th>Room type</th>
-        <th>Count of persons</th>
-        <th>Count of beds</th>
-        <th>Check in date</th>
-        <th>Check out date</th>
-        <th>Status</th>
+        <th th:text="#{request.id}">Request id</th>
+        <th th:text="#{client}">Client</th>
+        <th th:text="#{room.type}">Room type</th>
+        <th th:text="#{count.of.persons}">Count of persons</th>
+        <th th:text="#{count.of.beds}">Count of beds</th>
+        <th th:text="#{check.in.date}">Check in date</th>
+        <th th:text="#{check.out.date}">Check out date</th>
+        <th th:text="#{status}">Status</th>
     </tr>
     </thead>
     <tbody>
@@ -54,12 +55,12 @@
         <td th:text="${request.status}"></td>
         <td>
             <a th:href="@{/admin/find-room/{id}(id=${request.id})}"
-               th:text="${request.status==T(ua.polina.hotel_reservation.entity.Status).New_request} ? 'Find room':' '">Find
+               th:text="${request.status==T(ua.polina.hotel_reservation.entity.Status).New_request} ? #{find.room}:' '">Find
                 room</a>
         </td>
         <td>
             <a th:href="@{/admin/check-reservation/{id}(id=${request.id})}"
-               th:text="${request.status==T(ua.polina.hotel_reservation.entity.Status).Accepted} ? 'Check reservation':' '">Reservation</a>
+               th:text="${request.status==T(ua.polina.hotel_reservation.entity.Status).Accepted} ? #{check.reservation}:' '">Reservation</a>
         </td>
     </tr>
     </tbody>

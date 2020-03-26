@@ -6,8 +6,12 @@
     <title>Title</title>
 </head>
 <body>
+<th:block th:insert="fragments/language :: language"/>
 <div>
+    <h1 th:text="#{room.number}"></h1>
     <h1 th:text="*{reservation.room.roomNumber}"></h1>
+
+    <h1 th:text="#{reservation.sum}"></h1>
     <h1 th:text="*{reservation.sum}"></h1>
 </div>
 

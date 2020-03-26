@@ -6,43 +6,46 @@
     <title>Request</title>
 </head>
 <body>
+<th:block th:insert="fragments/language :: language"/>
 <div class="container">
     <section id="content">
         <form th:action="@{/client/apply}" th:object="${request}" method="post">
-            <h1>Request form</h1>
+            <h1 th:text="#{request.form}">Request form</h1>
             <div th:if="${error != null}">
                 <p th:text="${error}">...</p>
             </div>
             <div class="col-lg-6">
                 <select class="form-control" id="roomType" name="roomType" th:field="*{roomType}">
-                    <option value="">Select appartment class</option>
+                    <option th:text="#{select.appartmant.class}" value="">Select appartment class</option>
                     <option th:each="roomOpt : ${T(ua.polina.hotel_reservation.entity.RoomType).values()}"
                             th:value="${roomOpt}" th:text="${roomOpt.displayValue}"></option>
                 </select>
             </div>
             <div class="col-lg-6">
+                <label for="countOfPersons" th:text="#{select.count.of.persons}"></label>
                 <select class="form-control" id="countOfPersons" name="persons" th:field="*{countOfPerson}">
                     <option th:each="person : ${counts}"
                             th:value="${person}" th:text="${person}"></option>
                 </select>
             </div>
             <div class="col-lg-6">
+                <label for="countOfBeds" th:text="#{select.count.of.beds}"></label>
                 <select class="form-control" id="countOfBeds" name="beds" th:field="*{countOfBeds}">
                     <option th:each="bed : ${counts}"
                             th:value="${bed}" th:text="${bed}"></option>
                 </select>
             </div>
-            <div th:if="${#fields.hasErrors('checkInDate')}" th:errors="*{checkInDate}">CheckInDate Error</div>
+            <div th:if="${#fields.hasErrors('checkInDate')}" th:errors="*{checkInDate}" th:text="#{check.in.date.error}">CheckInDate Error</div>
             <div>
                 <input type="date" placeholder="CheckInDate" required="" id="checkInDate" th:value="*{checkInDate}"
                        th:field="*{{checkInDate}}" pattern="dd-MM-yyyy"/>
             </div>
-            <div th:if="${#fields.hasErrors('checkOutDate')}" th:errors="*{checkOutDate}">CheckOutDate Error</div>
+            <div th:if="${#fields.hasErrors('checkOutDate')}" th:errors="*{checkOutDate}" th:text="#{check.out.date.error}">CheckOutDate Error</div>
             <div>
-                <input type="date" placeholder="CheckOutDate" required="" id="checkOutDate" th:value="*{checkOutDate}"
+                <input type="date" th:placeholder="#{check.out.date}" required="" id="checkOutDate" th:value="*{checkOutDate}"
                        th:field="*{{checkOutDate}}" pattern="dd-MM-yyyy"/>
             </div>
-            <input type="submit" value="Sign up"/>
+            <input type="submit" th:value="#{apply}"/>
         </form>
     </section>
 </div>
