@@ -35,7 +35,7 @@ public class ClientService {
         User user = saveUser(signUpDto);
 
         if (clientRepository.existsClientByPassport(signUpDto.getPassport()))
-            throw new DataExistsException("Passport " + signUpDto.getPassport() + " already exists");
+            throw new DataExistsException("passport.exists");
 
         Client client = Client.builder()
                 .firstName(signUpDto.getFirstName())
@@ -53,9 +53,9 @@ public class ClientService {
         User user = new User();
 
         if (userRepository.existsUserByEmail(signUpDto.getEmail()))
-            throw new DataExistsException("Email " + signUpDto.getEmail() + " already exists");
+            throw new DataExistsException("email.exists");
         if (userRepository.existsUserByUsername(signUpDto.getUsername()))
-            throw new DataExistsException("Username " + signUpDto.getUsername() + " already exists");
+            throw new DataExistsException("username.exists");
 
         HashSet<Role> roles = new HashSet<>();
         roles.add(Role.CLIENT);

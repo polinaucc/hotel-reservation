@@ -69,7 +69,7 @@ public class ClientController {
             return "index";
         } catch (IllegalArgumentException ex) {
             LOGGER.error(rb.getString(ex.getMessage()));
-            model.addAttribute("error", rb.getString(ex.getMessage()));
+            model.addAttribute("error", ex.getMessage());
             return "client/request-form";
         }
     }
@@ -84,7 +84,7 @@ public class ClientController {
             return "client/my-request";
         } catch (IllegalArgumentException ex){
             LOGGER.error(rb.getString(ex.getMessage()));
-            model.addAttribute("error", rb.getString(ex.getMessage()));
+            model.addAttribute("error", ex.getMessage());
             return "error";
         }
     }
@@ -101,7 +101,7 @@ public class ClientController {
             return "reservation-info";
         } catch (IllegalArgumentException ex){
             LOGGER.error(rb.getString(ex.getMessage()));
-            model.addAttribute("error", rb.getString(ex.getMessage()));
+            model.addAttribute("error", ex.getMessage());
             return "error";
         }
     }

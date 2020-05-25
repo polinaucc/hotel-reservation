@@ -1,5 +1,7 @@
 package ua.polina.hotel_reservation.controller;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -14,14 +16,20 @@ import ua.polina.hotel_reservation.exception.DataExistsException;
 import ua.polina.hotel_reservation.service.ClientService;
 
 import javax.validation.Valid;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
     ClientService clientService;
+    private static final Logger LOGGER = LogManager.getLogger(AuthController.class);
+    private ResourceBundle rb;
 
     @Autowired
     public AuthController(ClientService clientService) {
+        rb = ResourceBundle.getBundle("messages", new Locale("en", "UK"));
         this.clientService = clientService;
     }
 
@@ -43,6 +51,7 @@ public class AuthController {
             clientService.saveNewClient(signUpDto);
             return "redirect:/auth/login";
         } catch (DataExistsException ex) {
+            LOGGER.error(rb.getString(Objects.requireNonNull(ex.getMessage())));
             model.addAttribute("error", ex.getMessage());
             return "register-client";
         }
