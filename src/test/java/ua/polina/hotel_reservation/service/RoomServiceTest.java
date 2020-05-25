@@ -80,11 +80,12 @@ public class RoomServiceTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test
-    public void saveRoom() {
-        Room room1 = roomService.saveRoom(roomDto, description1);
-        when(roomReppository.save(room1)).thenReturn(room1);
-    }
+        @Test
+        public void saveRoom() {
+            Room room1 = roomService.saveRoom(roomDto, description1);
+            when(roomReppository.save(any(Room.class))).thenReturn(room1);
+            Assert.assertEquals(room1, rooms.get(0));
+        }
 
     @Test
     public void getRoomsByDescription() {

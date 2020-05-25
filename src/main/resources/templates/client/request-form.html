@@ -12,7 +12,7 @@
         <form th:action="@{/client/apply}" th:object="${request}" method="post">
             <h1 th:text="#{request.form}">Request form</h1>
             <div th:if="${error != null}">
-                <p th:text="${error}">...</p>
+                <p th:text="#{${error}}">...</p>
             </div>
             <div class="col-lg-6">
                 <select class="form-control" id="roomType" name="roomType" th:field="*{roomType}">

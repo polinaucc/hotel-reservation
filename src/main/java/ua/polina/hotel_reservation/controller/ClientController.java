@@ -1,5 +1,7 @@
 package ua.polina.hotel_reservation.controller;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +14,7 @@ import ua.polina.hotel_reservation.service.DescriptionService;
 import ua.polina.hotel_reservation.service.RequestService;
 import ua.polina.hotel_reservation.service.ReservationService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/client")
@@ -23,12 +23,15 @@ public class ClientController {
     DescriptionService descriptionService;
     RequestService requestService;
     ReservationService reservationService;
+    private static Logger LOGGER = LogManager.getLogger(ClientController.class);
+    private ResourceBundle rb;
 
     @Autowired
     public ClientController(ClientService clientService,
                             DescriptionService descriptionService,
                             RequestService requestService,
                             ReservationService reservationService) {
+        rb = ResourceBundle.getBundle("messages", new Locale("en", "UK"));
         this.clientService = clientService;
         this.descriptionService = descriptionService;
         this.requestService = requestService;
@@ -56,40 +59,51 @@ public class ClientController {
         }
         try {
             Client client = clientService.getClientByUser(user)
-                    .orElseThrow(() -> new IllegalArgumentException("No client"));
+                    .orElseThrow(() -> new IllegalArgumentException("no.client"));
             Description description = descriptionService.getDescriptionByParameters(requestDto)
-                    .orElseThrow(() -> new IllegalArgumentException("No rooms with such parameters"));
+                    .orElseThrow(() -> new IllegalArgumentException("no.rooms.parameter"));
             if (requestDto.getCheckOutDate().isBefore(requestDto.getCheckInDate())) {
-                throw new IllegalArgumentException("Check out date must be after check in date");
+                throw new IllegalArgumentException("wrong.sequence.dates");
             }
             requestService.saveNewRequest(requestDto, client, description);
             return "index";
         } catch (IllegalArgumentException ex) {
-            model.addAttribute("error", ex.getMessage());
+            LOGGER.error(rb.getString(ex.getMessage()));
+            model.addAttribute("error", rb.getString(ex.getMessage()));
             return "client/request-form";
         }
     }
 
     @GetMapping("/my-requests")
-    public String getMyRequests(Model model, @CurrentUser User user,
-                                @RequestParam("page") Optional<Integer> page,
-                                @RequestParam("size") Optional<Integer> size) {
-        Client client = clientService.getClientByUser(user)
-                .orElseThrow(() -> new IllegalArgumentException("No client"));
-        List<Request> requests = requestService.getRequestsByClient(client);
-        model.addAttribute("requests", requests);
-        return "client/my-request";
+    public String getMyRequests(Model model, @CurrentUser User user) {
+        try {
+            Client client = clientService.getClientByUser(user)
+                    .orElseThrow(() -> new IllegalArgumentException("no.client"));
+            List<Request> requests = requestService.getRequestsByClient(client);
+            model.addAttribute("requests", requests);
+            return "client/my-request";
+        } catch (IllegalArgumentException ex){
+            LOGGER.error(rb.getString(ex.getMessage()));
+            model.addAttribute("error", rb.getString(ex.getMessage()));
+            return "error";
+        }
     }
 
     @GetMapping("check-bill/{id}")
     public String getReservationInfo(@PathVariable("id") Long requestId,
                                      Model model) {
-        Request request = requestService.getRequestById(requestId)
-                .orElseThrow(() -> new IllegalArgumentException("No such request"));
-        Reservation reservation = reservationService.getReservationByRequest(request)
-                .orElseThrow(() -> new IllegalArgumentException("No reservation"));
-        model.addAttribute("reservation", reservation);
-        return "reservation-info";
+        try {
+            Request request = requestService.getRequestById(requestId)
+                    .orElseThrow(() -> new IllegalArgumentException("no.request"));
+            Reservation reservation = reservationService.getReservationByRequest(request)
+                    .orElseThrow(() -> new IllegalArgumentException("no.reservation"));
+            model.addAttribute("reservation", reservation);
+            return "reservation-info";
+        } catch (IllegalArgumentException ex){
+            LOGGER.error(rb.getString(ex.getMessage()));
+            model.addAttribute("error", rb.getString(ex.getMessage()));
+            return "error";
+        }
     }
 
     @GetMapping("/index")
