@@ -1,5 +1,7 @@
 package ua.polina.hotel_reservation.controller;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,9 +18,7 @@ import ua.polina.hotel_reservation.service.RequestService;
 import ua.polina.hotel_reservation.service.ReservationService;
 import ua.polina.hotel_reservation.service.RoomService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -30,12 +30,15 @@ public class AdminController {
     RequestService requestService;
     RoomService roomService;
     ReservationService reservationService;
+    private static final Logger LOGGER = LogManager.getLogger(AdminController.class);
+    private ResourceBundle rb;
 
     @Autowired
     public AdminController(DescriptionService descriptionService,
                            RequestService requestService,
                            RoomService roomService,
                            ReservationService reservationService) {
+        rb = ResourceBundle.getBundle("messages", new Locale("en", "UK"));
         this.descriptionService = descriptionService;
         this.requestService = requestService;
         this.roomService = roomService;
@@ -142,6 +145,7 @@ public class AdminController {
 
     @GetMapping("/add-room")
     public String getRoomForm(Model model) {
+        model.addAttribute("error", null);
         model.addAttribute("newroom", new RoomDto());
         model.addAttribute("descriptions", descriptionService.getAllDescriptions());
         return "admin/add-room-form";
@@ -150,25 +154,38 @@ public class AdminController {
     @PostMapping("/add-room")
     public String addNewRoom(@ModelAttribute("newroom") RoomDto roomDto,
                              BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            return "index";
-        }
-        Description description = descriptionService.getDescriptionById(roomDto.getDescriptionId())
-                .orElseThrow(() -> new IllegalArgumentException("No such description"));
-        roomService.saveRoom(roomDto, description);
+        try {
+            if (bindingResult.hasErrors()) {
+                return "index";
+            }
+            Description description = descriptionService.getDescriptionById(roomDto.getDescriptionId())
+                    .orElseThrow(() -> new IllegalArgumentException("no.description"));
+            roomService.saveRoom(roomDto, description);
 
-        return "redirect:/admin/add-room";
+            return "redirect:/admin/add-room";
+        }catch (IllegalArgumentException ex){
+            LOGGER.error(rb.getString(ex.getMessage()));
+            model.addAttribute("error", ex.getMessage());
+            return "error";
+        }
     }
 
+    //TODO: almost same method is in ClientController
     @GetMapping("check-reservation/{id}")
     public String getReservationInfo(@PathVariable("id") Long requestId,
                                      Model model) {
-        Request request = requestService.getRequestById(requestId)
-                .orElseThrow(() -> new IllegalArgumentException("No such request"));
-        Reservation reservation = reservationService.getReservationByRequest(request)
-                .orElseThrow(() -> new IllegalArgumentException("No reservation"));
-        model.addAttribute("reservation", reservation);
-        return "reservation-info";
+        try {
+            Request request = requestService.getRequestById(requestId)
+                    .orElseThrow(() -> new IllegalArgumentException("no.request"));
+            Reservation reservation = reservationService.getReservationByRequest(request)
+                    .orElseThrow(() -> new IllegalArgumentException("no.reservation"));
+            model.addAttribute("reservation", reservation);
+            return "reservation-info";
+        } catch (IllegalArgumentException ex){
+            LOGGER.error(rb.getString(ex.getMessage()));
+            model.addAttribute("error", ex.getMessage());
+            return "error";
+        }
     }
 
     //TODO: "HELLO, ADMIN" add localization to th:inline block in html
