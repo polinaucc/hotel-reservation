@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Request</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/static/css/app-styles.css}">
+    <link rel="stylesheet" href="/css/app-styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 </head>
 <body>
-<th:block th:insert="fragments/language :: language"/>
+<div class="lang2">
+    <a href="/" th:text="#{home}"></a>
+</div>
 <div class="container">
-    <section id="content">
-        <form th:action="@{/admin/add-reservation}" th:object="${reservation}" method="post">
+    <div style="margin-left: 700px" class="name">
+        <th:block th:insert="fragments/language :: language"/>
+    </div>
+        <form class="form-signin" th:action="@{/admin/add-reservation}" th:object="${reservation}" method="post">
             <h3 class="h3 name font-weight-normal">Choose room</h3>
             <div class="form-group">
                 <select class="form-control" id="room" th:field="*{roomId}">
@@ -21,10 +25,9 @@
                             th:value="${room.id}" th:text="${room.roomNumber}"></option>
                 </select>
             </div>
-            <input type="submit" th:value="#{create.reservation}"/>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{create.reservation}"/>
         </form>
-    </section>
-    <a th:href="@{/}" th:text="#{home}"></a>
+        </form>
 </div>
 </body>
 </html>

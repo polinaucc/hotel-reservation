@@ -100,18 +100,8 @@ public class AdminController {
 
         List<Reservation> reservations = reservationService.getAllReservations();
 
-        //TODO: for in for is bad practice
         for (Room room : rooms) {
-            for (Reservation res : reservations) {
-                if (res.getRoom().equals(room) &&
-                        (request.getCheckInDate().compareTo(res.getRequest().getCheckInDate()) >= 0 &&
-                                request.getCheckInDate().isBefore(res.getRequest().getCheckOutDate())) ||
-                        (request.getCheckOutDate().compareTo(res.getRequest().getCheckInDate()) >= 0 &&
-                                request.getCheckOutDate().compareTo(res.getRequest().getCheckOutDate()) <= 0)) {
-                    wrongRooms.add(room);
-                    break;
-                }
-            }
+            findWrongRooms(request, wrongRooms, reservations, room);
         }
 
         for (Room r : wrongRooms) {
@@ -126,6 +116,19 @@ public class AdminController {
         else requestService.update(request, Status.Accepted);
 
         return "admin/find-room";
+    }
+
+    private void findWrongRooms(Request request, List<Room> wrongRooms, List<Reservation> reservations, Room room) {
+        for (Reservation res : reservations) {
+            if (res.getRoom().equals(room) &&
+                    ((request.getCheckInDate().compareTo(res.getRequest().getCheckInDate()) >= 0 &&
+                            request.getCheckInDate().isBefore(res.getRequest().getCheckOutDate())) ||
+                    (request.getCheckOutDate().compareTo(res.getRequest().getCheckInDate()) >= 0 &&
+                            request.getCheckOutDate().compareTo(res.getRequest().getCheckOutDate()) <= 0))) {
+                wrongRooms.add(room);
+                break;
+            }
+        }
     }
 
     @PostMapping("/add-reservation")
@@ -163,7 +166,7 @@ public class AdminController {
             roomService.saveRoom(roomDto, description);
 
             return "redirect:/admin/add-room";
-        }catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             LOGGER.error(rb.getString(ex.getMessage()));
             model.addAttribute("error", ex.getMessage());
             return "error";
@@ -181,7 +184,7 @@ public class AdminController {
                     .orElseThrow(() -> new IllegalArgumentException("no.reservation"));
             model.addAttribute("reservation", reservation);
             return "reservation-info";
-        } catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             LOGGER.error(rb.getString(ex.getMessage()));
             model.addAttribute("error", ex.getMessage());
             return "error";
@@ -189,7 +192,7 @@ public class AdminController {
     }
 
     @GetMapping("/index")
-    public String getIndexPage(){
+    public String getIndexPage() {
         return "index";
     }
 }

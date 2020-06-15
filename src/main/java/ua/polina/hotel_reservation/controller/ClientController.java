@@ -61,7 +61,7 @@ public class ClientController {
             Client client = clientService.getClientByUser(user)
                     .orElseThrow(() -> new IllegalArgumentException("no.client"));
             Description description = descriptionService.getDescriptionByParameters(requestDto)
-                    .orElseThrow(() -> new IllegalArgumentException("no.rooms.parameter"));
+                    .orElseThrow(() -> new IllegalArgumentException("no.rooms.parameters"));
             if (requestDto.getCheckOutDate().isBefore(requestDto.getCheckInDate())) {
                 throw new IllegalArgumentException("wrong.sequence.dates");
             }
