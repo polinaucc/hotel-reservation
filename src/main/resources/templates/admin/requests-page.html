@@ -35,12 +35,12 @@
         th:alt-title="${iStat.even}? 'even' : 'odd'">
         <td th:text="${request.id}"></td>
         <td th:text="${request.client.toString()}"></td>
-        <td th:text="${request.description.roomType}"></td>
+        <td th:text="#{${request.description.roomType.getDisplayValue()}}"></td>
         <td th:text="${request.description.countOfPersons}"></td>
         <td th:text="${request.description.countOfBeds}"></td>
         <td th:text="${request.checkInDate}"></td>
         <td th:text="${request.checkOutDate}"></td>
-        <td th:text="${request.status}"></td>
+        <td th:text="#{${request.status.getMessage()}}"></td>
         <td>
             <a th:href="@{/admin/find-room/{id}(id=${request.id})}"
                th:text="${request.status==T(ua.polina.hotel_reservation.entity.Status).New_request} ? #{find.room}:' '">Find
