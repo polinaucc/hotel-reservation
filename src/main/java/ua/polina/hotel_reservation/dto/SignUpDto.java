@@ -23,23 +23,23 @@ public class SignUpDto {
     private String password;
 
     @NotBlank
-    @Size(min = 4, max = 20, message = "{first.name.error}")
+    @Pattern(regexp = "^[A-Z][a-z]{4,19}", message = "{first.name.error}")
     private String firstName;
 
     @NotBlank
-    @Pattern(regexp = "^[А-ЩЮЯҐІЇЄ][а-щьюяґіїє']{3,20}$", message = "{ukr.error}")
+    @Pattern(regexp = "^[А-ЩЮЯҐІЇЄ][а-щьюяґіїє']{3,19}$", message = "{ukr.error}")
     private String firstNameUk;
 
     @NotBlank
-    @Size(min = 5, max = 20, message = "{middle.name.error}")
+    @Pattern(regexp = "^[A-Z][a-z]{4,19}", message = "{middle.name.error}")
     private String middleName;
 
     @NotBlank
-    @Pattern(regexp = "(^[А-ЩЇЮЯІ][а-щїюяіь']{2,})(ович$|івна$|ївна$)", message = "{middle.name.ukr.error}")
+    @Pattern(regexp = "(^[А-ЩЇЮЯІ][а-щїюяіь']{5,19})(ович$|івна$|ївна$)", message = "{middle.name.ukr.error}")
     private String middleNameUk;
 
     @NotBlank
-    @Size(min = 5, max = 20, message = "{last.name.error}")
+    @Pattern(regexp = "^[A-Z][a-z]{4,19}", message = "{last.name.error}")
     private String lastName;
 
     @NotBlank
