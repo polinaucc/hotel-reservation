@@ -1,19 +1,28 @@
-# Read Me First
-The following was discovered as part of building this project:
+# Hotel Reservation System
 
-* The original package name 'ua.polina.hotel-reservation' is invalid and this project uses 'ua.polina.hotel_reservation' instead.
+**Option 20**
 
-# Getting Started
+The client fills out the Application, indicating the number of seats in the room, class of apartments and time of stay.   
+The administrator views the received Application, selects the most suitable of the Available Numbers, 
+after which the system issues an Invoice to the Client.
 
-### Reference Documentation
-For further reference, please consider the following sections:
+**Вариант 20**
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.2.5.RELEASE/maven-plugin/)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.2.5.RELEASE/reference/htmlsingle/#boot-features-jpa-and-spring-data)
+Клиент заполняет Заявку, указывая количество мест в номере, класс апартаментов и время пребывания.  
+Администратор просматривает поступившую Заявку, выделяет наиболее подходящий из доступных Номеров, после чего система выставляет Счет Клиенту. 
 
-### Guides
-The following guides illustrate how to use some features concretely:
+## Installation and Running
 
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
+**_Requirements:_**
+* JDK 1.8
+* Apache Maven
+* PostgreSql
+
+**_Running the project:_**
+1. Clone this project to your local repository
+2. Change _spring.jpa.hibernate.ddl-auto_ in _application.properties_ from _update_ to _create_
+3. Update database login and password in _application.properties_
+4. Run **-mvn spring-boot:run** from project root folder
+5. The prokect will start on 8080 port. Use http://localhost:8080/ to view web application
+
 
