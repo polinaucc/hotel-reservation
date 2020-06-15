@@ -14,12 +14,12 @@ import ua.polina.hotel_reservation.entity.Room;
 import ua.polina.hotel_reservation.entity.RoomType;
 import ua.polina.hotel_reservation.repository.RoomReppository;
 
+import javax.validation.constraints.AssertTrue;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -56,13 +56,13 @@ public class RoomServiceTest {
                 .roomType(RoomType.ECONOMY)
                 .build();
         roomDto = RoomDto.builder()
-                .roomNumber("1-10")
-                .descriptionId(47L)
+                .roomNumber("1-04")
+                .descriptionId(1L)
                 .build();
         rooms = Arrays.asList(
                 Room.builder()
                         .id(1L)
-                        .roomNumber("1-04")
+                        .roomNumber("1-06")
                         .description(description1)
                         .build(),
                 Room.builder()
@@ -71,8 +71,7 @@ public class RoomServiceTest {
                         .description(description2)
                         .build(),
                 Room.builder()
-                        .id(3L)
-                        .roomNumber("1-06")
+                        .roomNumber("1-04")
                         .description(description1)
                         .build()
         );
@@ -80,12 +79,12 @@ public class RoomServiceTest {
         MockitoAnnotations.initMocks(this);
     }
 
-        @Test
-        public void saveRoom() {
-            Room room1 = roomService.saveRoom(roomDto, description1);
-            when(roomReppository.save(any(Room.class))).thenReturn(room1);
-            Assert.assertEquals(room1, rooms.get(0));
-        }
+    @Test
+    public void saveRoom() {
+        Room currentRoom = rooms.get(2);
+        roomService.saveRoom(roomDto, description1);
+        verify(roomReppository, times(1)).save(currentRoom);
+    }
 
     @Test
     public void getRoomsByDescription() {

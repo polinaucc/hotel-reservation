@@ -32,18 +32,4 @@ public class Room {
     @OneToMany(mappedBy = "room")
     private Set<Reservation> reservations;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Room room = (Room) o;
-        return id.equals(room.id) &&
-                roomNumber.equals(room.roomNumber) &&
-                description.equals(room.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, roomNumber, description);
-    }
 }

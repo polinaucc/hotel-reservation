@@ -19,14 +19,14 @@
     <form class="form-signin" th:action="@{/admin/add-room}" th:object="${newroom}" method="post">
         <h1 th:text="#{room.form}">Room form</h1>
         <div class="form-group">
-            <input class="form-control" type="text" placeholder="Room number" required="" id="roomNumber"
+            <input class="form-control" type="text" th:placeholder="#{room.number}" required="" id="roomNumber"
                    th:field="*{roomNumber}"/>
         </div>
         <div class="form-group">
             <select class="form-control" id="room" th:field="*{descriptionId}">
                 <option th:text="#{room.select.description}" value="">Select description</option>
                 <option th:each="d : ${descriptions}"
-                        th:value="${d.id}" th:text="${d}"></option>
+                        th:value="${d.id}" th:text="#{${d.roomType.getDisplayValue()}} + ' ' + #{for} +' ' + ${d.countOfPersons} +' '+ #{persons} +' ' + #{with} +' ' + ${d.countOfBeds} +' '+ #{beds} + ';' + ' ' + #{price} + ' ' + ${d.costPerNight} + #{grn}"></option>
             </select>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{room.add}"></button>
