@@ -42,33 +42,55 @@
                    id="firstname"
                    th:field="*{firstName}"/>
         </div>
+        <div class="error" th:if="${#fields.hasErrors('firstNameUk')}" th:errors="*{firstNameUk}">First name Error</div>
+        <div>
+            <input class="form-control" type="text" th:placeholder="#{placeholder.first.name.uk}" required=""
+                   id="firstnameUk"
+                   th:field="*{firstNameUk}"/>
+        </div>
         <div class="error" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}">Middle name Error</div>
         <div>
             <input class="form-control" type="text" th:placeholder="#{placeholder.second.name}" required=""
                    id="middlename"
                    th:field="*{middleName}"/>
         </div>
+        <div class="error" th:if="${#fields.hasErrors('middleNameUk')}" th:errors="*{middleNameUk}">Middle name Error
+        </div>
+        <div>
+            <input class="form-control" type="text" th:placeholder="#{placeholder.middle.name.uk}" required=""
+                   id="middlenameUk"
+                   th:field="*{middleNameUk}"/>
+        </div>
         <div class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name Error</div>
         <div>
             <input class="form-control" type="text" th:placeholder="#{placeholder.last.name}" required="" id="lastname"
                    th:field="*{lastName}"/>
-        </div>
-        <div class="error" th:if="${#fields.hasErrors('passport')}" th:errors="*{passport}">Passport Error</div>
-        <div>
-            <input class="form-control" type="text" th:placeholder="#{placeholder.passport}" required="" id="passport"
-                   th:field="*{passport}"
-                   pattern="^[А-Я]{2}[0-9]{6}$"/>
-        </div>
-        <div class="error" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">Birthday Error</div>
-        <div>
-            <input class="form-control" type="date" th:placeholder="#{placeholder.birthday}" required="" id="birthday"
-                   th:value="*{birthday}"
-                   th:field="*{birthday}" pattern="dd-MM-yyyy"/>
-        </div>
-        <div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{sign.up}"></button>
-            <a th:href="@{/auth/login}" th:text="#{login.log.in}">Log in</a>
-        </div>
+
+            <div class="error" th:if="${#fields.hasErrors('lastNameUk')}" th:errors="*{lastNameUk}">Last name Error
+            </div>
+            <div>
+                <input class="form-control" type="text" th:placeholder="#{placeholder.last.name.uk}" required=""
+                       id="lastnameUk"
+                       th:field="*{lastNameUk}"/>
+            </div>
+            <div class="error" th:if="${#fields.hasErrors('passport')}" th:errors="*{passport}">Passport Error</div>
+            <div>
+                <input class="form-control" type="text" th:placeholder="#{placeholder.passport}" required=""
+                       id="passport"
+                       th:field="*{passport}"
+                       pattern="^[А-Я]{2}[0-9]{6}$"/>
+            </div>
+            <div class="error" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">Birthday Error</div>
+            <div>
+                <input class="form-control" type="date" th:placeholder="#{placeholder.birthday}" required=""
+                       id="birthday"
+                       th:value="*{birthday}"
+                       th:field="*{birthday}" pattern="dd-MM-yyyy"/>
+            </div>
+            <div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{sign.up}"></button>
+                <a th:href="@{/auth/login}" th:text="#{login.log.in}">Log in</a>
+            </div>
     </form>
 </div>
 </body>

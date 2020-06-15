@@ -39,8 +39,11 @@ public class ClientService {
 
         Client client = Client.builder()
                 .firstName(signUpDto.getFirstName())
+                .firstNameUk(signUpDto.getFirstNameUk())
                 .middleName(signUpDto.getMiddleName())
+                .middleNameUk(signUpDto.getMiddleNameUk())
                 .lastName(signUpDto.getLastName())
+                .lastNameUk(signUpDto.getLastNameUk())
                 .passport(signUpDto.getPassport())
                 .birthday(signUpDto.getBirthday())
                 .user(user)

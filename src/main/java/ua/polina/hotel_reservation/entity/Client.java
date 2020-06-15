@@ -29,11 +29,20 @@ public class Client {
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @Column(name = "first_name_uk")
+    private String firstNameUk;
+
     @Column(name = "middle_name", nullable = false)
     private String middleName;
 
+    @Column(name = "middle_name_uk")
+    private String middleNameUk;
+
     @Column(name = "last_name", nullable = false)
     private String lastName;
+
+    @Column(name = "last_name_uk", nullable = false)
+    private String lastNameUk;
 
     @Column(name = "passport", unique = true, nullable = false)
     private String passport;
@@ -44,8 +53,11 @@ public class Client {
     @OneToMany(mappedBy = "client")
     private Set<Request> requests;
 
-    @Override
-    public String toString() {
+    public String enName() {
         return firstName + " " + middleName + " " + lastName;
+    }
+
+    public String ukrName() {
+        return firstNameUk + " " + middleNameUk + " " + lastNameUk;
     }
 }

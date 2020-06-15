@@ -34,7 +34,7 @@
         th:style="${iStat.odd}? 'font-weight: bold;'"
         th:alt-title="${iStat.even}? 'even' : 'odd'">
         <td th:text="${request.id}"></td>
-        <td th:text="${request.client.toString()}"></td>
+        <td th:text="${#locale=='en'}?${request.client.enName()}:${request.client.ukrName()}"></td>
         <td th:text="#{${request.description.roomType.getDisplayValue()}}"></td>
         <td th:text="${request.description.countOfPersons}"></td>
         <td th:text="${request.description.countOfBeds}"></td>
