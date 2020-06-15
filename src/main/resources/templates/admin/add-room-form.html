@@ -2,28 +2,35 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/logIn.css}">
+    <link rel="stylesheet" href="/css/app-styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Add room</title>
 </head>
-<body>
-<th:block th:insert="fragments/language :: language"/>
+<body class="text-center" data-gr-c-s-loaded="true">
+<div class="lang">
+    <a href="/" th:text="#{home}"></a>
+</div>
+
 <div class="container">
-    <section id="content">
-        <form th:action="@{/admin/add-room}" th:object="${newroom}" method="post">
-            <h1 th:text="#{room.form}">Room form</h1>
-            <div>
-                <input type="text" placeholder="Room number" required="" id="roomNumber" th:field="*{roomNumber}"/>
-            </div>
-            <div class="col-lg-6">
-                <select class="form-control" id="room" th:field="*{descriptionId}">
-                    <option th:text="#{room.select.description}" value="">Select description</option>
-                    <option th:each="d : ${descriptions}"
-                            th:value="${d.id}" th:text="${d}"></option>
-                </select>
-            </div>
-            <input type="submit" th:value="#{room.add}"/>
-        </form>
-    </section>
+    <div style="margin-left: 400px" class="name">
+        <th:block th:insert="fragments/language :: language"/>
+    </div>
+    <form class="form-signin" th:action="@{/admin/add-room}" th:object="${newroom}" method="post">
+        <h1 th:text="#{room.form}">Room form</h1>
+        <div class="form-group">
+            <input class="form-control" type="text" placeholder="Room number" required="" id="roomNumber"
+                   th:field="*{roomNumber}"/>
+        </div>
+        <div class="form-group">
+            <select class="form-control" id="room" th:field="*{descriptionId}">
+                <option th:text="#{room.select.description}" value="">Select description</option>
+                <option th:each="d : ${descriptions}"
+                        th:value="${d.id}" th:text="${d}"></option>
+            </select>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{room.add}"></button>
+    </form>
 </div>
 </body>
 </html>

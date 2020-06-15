@@ -3,32 +3,20 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Requests</title>
-    <style>
-        table {
-            width: 100%;
-        }
+    <link rel="stylesheet" href="/css/app-styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-        table td, table th {
-            border: 1px solid grey;
-        }
-
-        table th {
-            background: #eee;
-        }
-
-        .pagination-div span {
-            border-radius: 3px;
-            border: 1px solid #999;
-            padding: 5px;
-            margin: 10px 0px 0px 10px;
-            display: inline-block
-        }
-    </style>
 </head>
 <body>
-<th:block th:insert="fragments/language :: language"/>
-<h2>Requests</h2>
-<table border="1">
+<div class="header-container">
+    <h3 th:text="#{admin.view.requests}">Requests</h3>
+</div>
+<div class="lang2">
+    <th:block th:insert="fragments/language :: language"/>
+</div>
+
+<table class="table table-hover">
     <thead>
     <tr>
         <th th:text="#{request.id}">Request id</th>
@@ -67,11 +55,14 @@
 </table>
 
 
-<div th:if="${requestPage.totalPages > 0}" class="pagination"
+<div th:if="${requestPage.totalPages > 0}" class="pagination justify-content-center"
      th:each="pageNumber : ${pageNumbers}">
     <a th:href="@{/admin/requests(size=${requestPage.size}, page=${pageNumber})}"
        th:text=${pageNumber}
        th:class="${pageNumber==requestPage.number + 1} ? active"></a>
+</div>
+<div class="name">
+    <a th:href="@{/}" th:text="#{home}"></a>
 </div>
 </body>
 </html>

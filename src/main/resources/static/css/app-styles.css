@@ -1,0 +1,91 @@
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+}
+
+.name{
+    width: 100%;
+    max-width: 330px;
+    margin-right: 200px;
+}
+
+.home{
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+body {
+    align-items: center;
+    align-content: center;
+}
+
+.container {
+    align-items: center;
+    alignment: center;
+    margin-top: 25vh;
+    width: 350px;
+}
+
+h3{
+    width: 90vw;
+    text-align: center;
+    display: inline-block;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    margin-left: 400px;
+    padding: 15px;
+}
+
+.btn{
+    margin-top: 25px;
+}
+
+.btn {
+    margin-top: 25px;
+}
+
+.error {
+    font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
+    color: #c62828;
+}
+
+h2, h3{
+    width: 90vw;
+    text-align: center;
+    display: inline-block;
+}
+.header-container{
+    align-items: center;
+    align-content: center;
+    width: 93vw;
+    display: inline-block;
+}
+
+
+li{
+    float: left;
+    padding: 5px;
+}
+
+li a{
+    display: block;
+}
+
+.lang2 {
+    display: inline-block;
+}
+
+.name{
+    width: 100%;
+    max-width: 330px;
+    margin-right: 200px;
+    align-content: center;
+    align-items: center;
+    alignment: center;
+}
+

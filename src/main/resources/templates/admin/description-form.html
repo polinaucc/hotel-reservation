@@ -2,42 +2,48 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/logIn.css}">
+    <link rel="stylesheet" href="/css/app-styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Request</title>
 </head>
-<body>
-<th:block th:insert="fragments/language :: language"/>
+<body class="text-center" data-gr-c-s-loaded="true">
+<div class="lang2">
+    <a href="/" th:text="#{home}"></a>
+</div>
 <div class="container">
-    <section id="content">
-        <form th:action="@{/admin/add-description}" th:object="${description}" method="post">
-            <h1 th:text="#{description.form}">Description form</h1>
-            <div class="col-lg-6">
-                <select class="form-control" id="room" th:field="*{roomType}">
-                    <option th:text="#{select.appartmant.class}" value="">Select appartment class</option>
-                    <option th:each="room : ${T(ua.polina.hotel_reservation.entity.RoomType).values()}"
-                            th:value="${room}" th:text="${room.displayValue}"></option>
-                </select>
-            </div>
-            <div class="col-lg-6">
-                <label for="countOfPersons" th:text="#{select.count.of.persons}"></label>
-                <select class="form-control" id="countOfPersons" name="persons" th:field="*{countOfPersons}">
-                    <option th:each="person : ${counts}"
-                            th:value="${person}" th:text="${person}"></option>
-                </select>
-            </div>
-            <div class="col-lg-6">
-                <label for="countOfBeds" th:text="#{select.count.of.beds}"></label>
-                <select class="form-control" id="countOfBeds" name="beds" th:field="*{countOfBeds}">
-                    <option th:each="bed : ${counts}"
-                            th:value="${bed}" th:text="${bed}"></option>
-                </select>
-            </div>
-            <div>
-                <input type="number" th:placeholder="#{placeholder.cost.per.night}" required="" id="cost" th:field="*{costPerNight}"/>
-            </div>
-            <input type="submit" value="Add"/>
-        </form>
-    </section>
+    <div style="margin-left: 400px" class="name">
+        <th:block th:insert="fragments/language :: language"/>
+    </div>
+    <form class="form-signin" th:action="@{/admin/add-description}" th:object="${description}" method="post">
+        <h1 th:text="#{description.form}">Description form</h1>
+        <div class="form-group">
+            <select class="form-control" id="room" th:field="*{roomType}">
+                <option th:text="#{select.appartmant.class}" value="">Select appartment class</option>
+                <option th:each="room : ${T(ua.polina.hotel_reservation.entity.RoomType).values()}"
+                        th:value="${room}" th:text="${room.displayValue}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="countOfPersons" th:text="#{select.count.of.persons}"></label>
+            <select class="form-control" id="countOfPersons" name="persons" th:field="*{countOfPersons}">
+                <option th:each="person : ${counts}"
+                        th:value="${person}" th:text="${person}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="countOfBeds" th:text="#{select.count.of.beds}"></label>
+            <select class="form-control" id="countOfBeds" name="beds" th:field="*{countOfBeds}">
+                <option th:each="bed : ${counts}"
+                        th:value="${bed}" th:text="${bed}"></option>
+            </select>
+        </div>
+        <div>
+            <input class="form-control" type="number" th:placeholder="#{placeholder.cost.per.night}" required=""
+                   id="cost" th:field="*{costPerNight}"/>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{admin.add.new.description}"/>
+    </form>
 </div>
 </body>
 </html>

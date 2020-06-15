@@ -108,6 +108,6 @@ public class ClientController {
 
     @GetMapping("/index")
     public String getIndexPage(){
-        return "client/client-index";
+        return "index";
     }
 }

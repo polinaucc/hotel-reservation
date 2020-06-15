@@ -3,33 +3,18 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>My requests</title>
-    <style>
-        table {
-            width: 100%;
-        }
-
-        table td, table th {
-            border: 1px solid grey;
-        }
-
-        table th {
-            background: #eee;
-        }
-
-        .pagination-div span {
-            border-radius: 3px;
-            border: 1px solid #999;
-            padding: 5px;
-            margin: 10px 0px 0px 10px;
-            display: inline-block
-        }
-
-    </style>
+    <link rel="stylesheet" href="/css/app-styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-<th:block th:insert="fragments/language :: language"/>
-<h2>My Requests</h2>
-<table border="1">
+<div class="header-container">
+    <h3 class="h3 mb-3 font-weight-normal">My Requests</h3>
+</div>
+<div class="lang2">
+    <th:block th:insert="fragments/language :: language"/>
+</div>
+<table class="table table-hover">
     <thead>
     <tr>
         <th th:text="#{room.type}">Room type</th>
@@ -57,7 +42,11 @@
     </tr>
     </tbody>
 </table>
-
-<a th:href="@{/client/apply}" th:text="#{form.new.request}">Create new request</a>
+<div class="name">
+    <a th:href="@{/client/apply}" th:text="#{form.new.request}">Create new request</a>
+</div>
+<div class="name">
+    <a th:href="@{/}" th:text="#{home}"></a>
+</div>
 </body>
 </html>

@@ -1,25 +1,54 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<header th:fragment="header">
-    <ul class="d-inline-flex nav">
-        <li class="nav-item ">
-            <a class="nav-link" href="#" th:text="#{home}">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#" th:text="#{contacts}">Contacts</a>
-        </li>
-        <li class="nav-item" th:if="${#httpServletRequest.remoteUser==null}">
-            <a class="nav-link" th:href="@{/auth/login}" th:text="#{login.log.in}">Log in</a>
-        </li>
-        <li class="nav-item" th:if="${#httpServletRequest.remoteUser==null}">
-            <a class="nav-link" th:href="@{/auth/sign-up}" th:text="#{register}">Register</a>
-        </li>
-        <li class="nav-item" th:if="${#httpServletRequest.remoteUser!=null}">
-            <a class="nav-link" th:href="@{/logout}" th:text="#{log.out}">Log out</a>
-        </li>
-    </ul>
-    <h2 th:if="${#httpServletRequest.remoteUser!=null}"  th:inline="text"> Hello, [[${#httpServletRequest.remoteUser}]] </h2>
+<div style="display: inline-block" th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div style="width: 98vw" class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="#" th:text="#{home}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:text="#{contacts}">Contacts</a>
+                </li>
+                <li class="nav-item" th:if="${#httpServletRequest.remoteUser==null}">
+                    <a class="nav-link" th:href="@{/auth/login}" th:text="#{login.log.in}">Log in</a>
+                </li>
+                <li class="nav-item" th:if="${#httpServletRequest.remoteUser==null}">
+                    <a class="nav-link" th:href="@{/auth/sign-up}" th:text="#{register}">Register</a>
+                </li>
+                <li class="nav-item" th:if="${#httpServletRequest.remoteUser!=null}">
+                    <a class="nav-link" th:href="@{/logout}" th:text="#{log.out}">Log out</a>
+                </li>
+                <li class="nav-item" th:if="${#httpServletRequest.remoteUser=='admin'}">
+                    <a class="nav-link" th:href="@{/admin/add-description}" th:text="#{admin.add.new.description}"> Add
+                        new
+                        description</a>
+                </li>
+                <li class="nav-item" th:if="${#httpServletRequest.remoteUser=='admin'}">
+                    <a class="nav-link" th:href="@{/admin/requests}" th:text="#{admin.view.requests}"> View requests</a>
+                </li>
+                <li class="nav-item" th:if="${#httpServletRequest.remoteUser=='admin'}">
+                    <a class="nav-link" th:href="@{/admin/add-room}" th:text="#{admin.add.room}"> Add new room</a>
+                </li>
+                <li class="nav-item" th:if="${#httpServletRequest.remoteUser!='admin' and #httpServletRequest.remoteUser!=null}">
+                    <a class="nav-link" th:href="@{/client/apply}" th:text="#{form.new.request}">Form new request</a>
+                </li>
+                <li class="nav-item" th:if="${#httpServletRequest.remoteUser!='admin' and #httpServletRequest.remoteUser!=null}">
+                    <a class="nav-link" th:href="@{/client/my-requests}" th:text="#{view.requests}"> View my requests</a>
+                </li>
+            </ul>
+            <div class="lang2">
+                <div th:fragment="language">
+                    <a th:href="@{''(lang=en)}" th:text="#{language.eng}">EN</a>
+                    |
+                    <a th:href="@{''(lang=uk)}" th:text="#{language.ua}">UK</a>
+                </div>
+                <div th:if="${#httpServletRequest.remoteUser!=null}">
+                    [[${#httpServletRequest.remoteUser}]]
+                </div>
+            </div>
 
-
-</header>
+        </div>
+    </nav>
+</div>
 </html>

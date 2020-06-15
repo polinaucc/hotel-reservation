@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Request</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/app-styles.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 </head>
 <body>
 <th:block th:insert="fragments/language :: language"/>
 <div class="container">
     <section id="content">
         <form th:action="@{/admin/add-reservation}" th:object="${reservation}" method="post">
-            <h1>Choose room</h1>
-            <div class="col-lg-6">
+            <h3 class="h3 name font-weight-normal">Choose room</h3>
+            <div class="form-group">
                 <select class="form-control" id="room" th:field="*{roomId}">
                     <option th:text="#{select.free.room}" value="">Select free room</option>
                     <option th:each="room : ${rooms}"
@@ -20,6 +24,7 @@
             <input type="submit" th:value="#{create.reservation}"/>
         </form>
     </section>
+    <a th:href="@{/}" th:text="#{home}"></a>
 </div>
 </body>
 </html>

@@ -2,33 +2,39 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/logIn.css}">
+    <link rel="stylesheet" href="/css/app-styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <title>Log in</title>
 </head>
-<body>
-<th:block th:insert="fragments/language :: language"/>
+<body class="text-center" data-gr-c-s-loaded="true">
+<div class="lang2">
+    <a th:href="@{/}" th:text="#{home}"></a>
+</div>
 <div class="container">
-    <section id="content">
-        <form th:action="@{/auth/login}" method="post">
-            <h1 th:text="#{login.form}">Login form</h1>
-            <div th:if="${logout}">
-                <div class="alert alert-info" role="alert" th:text="#{login.logged.out}">Logged out. </div>
+    <div style="margin-left: 400px" class="name">
+        <th:block th:insert="fragments/language :: language"/>
+    </div>
+    <form class="form-signin" th:action="@{/auth/login}" method="post">
+        <h3 class="h3 font-weight-normal name" th:text="#{login.form}">Login form</h3>
+        <div th:if="${logout}">
+            <div class="alert alert-info" role="alert" th:text="#{login.logged.out}">Logged out.</div>
+        </div>
+        <div th:if="${error}">
+            <div class="alert alert-danger" role="alert" th:text="#{login.invalid.credentials}">Invalid
+                credentials!
             </div>
-            <div th:if="${error}">
-                <div class="alert alert-danger" role="alert" th:text="#{login.invalid.credentials}">Invalid credentials! </div>
-            </div>
-            <div>
-                <input type="text" th:placeholder="#{placeholder.username}" required="" id="username" name="username"/>
-            </div>
-            <div>
-                <input type="password" th:placeholder="#{placeholder.password}" required="" id="password" name="password"/>
-            </div>
-            <div>
-                <input type="submit" th:value="#{login.log.in}"/>
-                <a th:href="@{/auth/sign-up}" th:text="#{register}">Register</a>
-            </div>
-        </form>
-    </section>
+        </div>
+        <div>
+            <input class="form-control" type="text" th:placeholder="#{placeholder.username}" required="" id="username" name="username"/>
+        </div>
+        <div>
+            <input class="form-control" type="password" th:placeholder="#{placeholder.password}" required="" id="password" name="password"/>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.log.in}"/>
+        <a th:href="@{/auth/sign-up}" th:text="#{register}">Register</a>
+    </form>
 </div>
 </body>
 </html>

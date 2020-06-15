@@ -188,10 +188,9 @@ public class AdminController {
         }
     }
 
-    //TODO: "HELLO, ADMIN" add localization to th:inline block in html
     @GetMapping("/index")
     public String getIndexPage(){
-        return "admin/admin-index";
+        return "index";
     }
 }
 
