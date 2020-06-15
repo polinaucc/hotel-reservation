@@ -2,43 +2,44 @@ package ua.polina.hotel_reservation.dto;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+import ua.polina.hotel_reservation.entity.FullAgeConstraint;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Data
 public class SignUpDto {
-    @NotBlank(message = "The field must not be blank")
-    @Size(max = 40, message = "Max size is 40 characters")
-    @Email(message = "Illegal email")
+    @NotBlank
+    @Size(max = 40, message = "{email.size.error}")
+    @Email(message = "{email.error}")
     private String email;
 
-    @NotBlank(message = "The field must not be blank")
-    @Size(min = 5, max = 20, message = "Username size must be in the range from 5 to 40 characters")
+    @NotBlank
+    @Size(min = 5, max = 20, message = "{username.error}")
     private String username;
 
-    @NotBlank(message = "The field must not be blank")
-    @Size(min = 5, max = 20, message = "Password size must be in the range from 5 to 20 characters")
+    @NotBlank
+    @Size(min = 5, max = 20, message = "password.error")
     private String password;
 
-    @NotBlank(message = "The field must not be blank")
-    @Size(min = 5, max = 20, message = "First name size must be in the range from 5 to 20 characters")
+    @NotBlank
+    @Size(min = 4, max = 20, message = "{first.name.error}")
     private String firstName;
 
-    @NotBlank(message = "The field must not be blank")
-    @Size(min = 5, max = 20, message = "Middle name size must be in the range from 5 to 20 characters")
+    @NotBlank
+    @Size(min = 5, max = 20, message = "{middle.name.error}")
     private String middleName;
 
-    @NotBlank(message = "The field must not be blank")
-    @Size(min = 5, max = 20, message = "Last name size must be in the range from 5 to 20 characters")
+    @NotBlank
+    @Size(min = 5, max = 20, message = "{last.name.error}")
     private String lastName;
 
-    @NotBlank(message = "The field must not be blank")
-    @Pattern(regexp = "^[А-Я]{2}[0-9]{6}$", message = "Illegal passport!")
+    @NotBlank
+    @Pattern(regexp = "^[А-Я]{2}[0-9]{6}$", message = "{illegal.passport}")
     private String passport;
 
-    //TODO:check if person is more than 18 years old
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past
+    @FullAgeConstraint
     private LocalDate birthday;
 }
