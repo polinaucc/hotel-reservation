@@ -14,9 +14,9 @@ import ua.polina.hotel_reservation.entity.Room;
 import ua.polina.hotel_reservation.entity.RoomType;
 import ua.polina.hotel_reservation.repository.RoomReppository;
 
-import javax.validation.constraints.AssertTrue;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,14 +30,10 @@ public class RoomServiceTest {
     @InjectMocks
     RoomService roomService;
 
-    @InjectMocks
     RoomDto roomDto;
-
     Description description1;
     Description description2;
-
     List<Room> rooms;
-
 
     @Before
     public void setUp() throws Exception {
@@ -81,20 +77,15 @@ public class RoomServiceTest {
 
     @Test
     public void saveRoom() {
-        Room currentRoom = rooms.get(2);
         roomService.saveRoom(roomDto, description1);
-        verify(roomReppository, times(1)).save(currentRoom);
+        verify(roomReppository, times(1)).save(any(Room.class));
     }
 
     @Test
     public void getRoomsByDescription() {
-        Room roomWithDescription2 = rooms.get(1);
-        List<Room> expectedRoomsList = Arrays.asList(roomWithDescription2);
-
+        List<Room> expectedRoomsList = Collections.singletonList(rooms.get(1));
         when(roomReppository.findRoomsByDescription(description2)).thenReturn(expectedRoomsList);
-
         List<Room> actualRoomsList = roomService.getRoomsByDescription(description2);
-
         Assert.assertEquals(1, actualRoomsList.size());
         Assert.assertEquals(expectedRoomsList, actualRoomsList);
     }
@@ -102,17 +93,10 @@ public class RoomServiceTest {
     @Test
     public void getRoomById() {
         Room room = rooms.get(0);
-        Long id = room.getId();
-
         Optional<Room> expectedRoom = Optional.of(room);
-
-        when(roomReppository.findById(id))
+        when(roomReppository.findById(1L))
                 .thenReturn(expectedRoom);
-
-        Optional<Room> room1 = roomService.getRoomById(id);
-
-        Assert.assertEquals(expectedRoom, room1);
-        verify(roomReppository, times(1)).findById(id);
-
+        Assert.assertEquals(expectedRoom, roomService.getRoomById(room.getId()));
+        verify(roomReppository, times(1)).findById(1L);
     }
 }
