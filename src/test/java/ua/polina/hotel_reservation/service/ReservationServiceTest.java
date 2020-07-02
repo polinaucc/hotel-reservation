@@ -8,7 +8,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import ua.polina.hotel_reservation.entity.*;
-import ua.polina.hotel_reservation.repository.RequestRepository;
 import ua.polina.hotel_reservation.repository.ReservationRepository;
 
 import java.math.BigDecimal;
@@ -17,7 +16,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class ReservationServiceTest {

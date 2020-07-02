@@ -2,7 +2,6 @@ package ua.polina.hotel_reservation.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.polina.hotel_reservation.dto.ReservationDto;
 import ua.polina.hotel_reservation.entity.Request;
 import ua.polina.hotel_reservation.entity.Reservation;
 import ua.polina.hotel_reservation.entity.Room;
@@ -33,11 +32,11 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
-    public Optional<Reservation> getReservationByRequest(Request request){
+    public Optional<Reservation> getReservationByRequest(Request request) {
         return reservationRepository.findByRequest(request);
     }
 
-    public List<Reservation> getAllReservations(){
+    public List<Reservation> getAllReservations() {
         return reservationRepository.findAll();
     }
 }

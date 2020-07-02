@@ -9,9 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.polina.hotel_reservation.dto.SignUpDto;
-import ua.polina.hotel_reservation.entity.CurrentUser;
 import ua.polina.hotel_reservation.entity.Role;
-import ua.polina.hotel_reservation.entity.User;
 import ua.polina.hotel_reservation.exception.DataExistsException;
 import ua.polina.hotel_reservation.service.ClientService;
 
@@ -80,7 +78,7 @@ public class AuthController {
     }
 
     @GetMapping("/index")
-    public String getIndexPage(){
+    public String getIndexPage() {
         return "index";
     }
 }

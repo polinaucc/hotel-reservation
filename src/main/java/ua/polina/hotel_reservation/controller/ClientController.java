@@ -14,7 +14,10 @@ import ua.polina.hotel_reservation.service.DescriptionService;
 import ua.polina.hotel_reservation.service.RequestService;
 import ua.polina.hotel_reservation.service.ReservationService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 @Controller
 @RequestMapping("/client")
@@ -82,7 +85,7 @@ public class ClientController {
             List<Request> requests = requestService.getRequestsByClient(client);
             model.addAttribute("requests", requests);
             return "client/my-request";
-        } catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             LOGGER.error(rb.getString(ex.getMessage()));
             model.addAttribute("error", ex.getMessage());
             return "error";
@@ -99,7 +102,7 @@ public class ClientController {
                     .orElseThrow(() -> new IllegalArgumentException("no.reservation"));
             model.addAttribute("reservation", reservation);
             return "reservation-info";
-        } catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             LOGGER.error(rb.getString(ex.getMessage()));
             model.addAttribute("error", ex.getMessage());
             return "error";
@@ -107,7 +110,7 @@ public class ClientController {
     }
 
     @GetMapping("/index")
-    public String getIndexPage(){
+    public String getIndexPage() {
         return "index";
     }
 }

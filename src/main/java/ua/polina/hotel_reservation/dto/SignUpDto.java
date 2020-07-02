@@ -51,7 +51,7 @@ public class SignUpDto {
     private String passport;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Past
+    @Past(message = "{wrong.format}")
     @FullAgeConstraint
     private LocalDate birthday;
 }

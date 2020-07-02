@@ -19,7 +19,7 @@ public class RoomService {
         this.roomReppository = roomReppository;
     }
 
-    public Room saveRoom(RoomDto roomDto, Description description){
+    public Room saveRoom(RoomDto roomDto, Description description) {
         Room room = Room.builder()
                 .roomNumber(roomDto.getRoomNumber())
                 .description(description)
@@ -27,11 +27,11 @@ public class RoomService {
         return roomReppository.save(room);
     }
 
-    public List<Room> getRoomsByDescription(Description description){
+    public List<Room> getRoomsByDescription(Description description) {
         return roomReppository.findRoomsByDescription(description);
     }
 
-    public Optional<Room> getRoomById(Long id){
-        return  roomReppository.findById(id);
+    public Optional<Room> getRoomById(Long id) {
+        return roomReppository.findById(id);
     }
 }

@@ -8,7 +8,7 @@ public enum Status {
     private String message;
 
     Status(String message) {
-        this.message=message;
+        this.message = message;
     }
 
     public String getMessage() {

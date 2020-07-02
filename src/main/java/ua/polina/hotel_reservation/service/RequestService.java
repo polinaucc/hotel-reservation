@@ -52,7 +52,7 @@ public class RequestService {
                 .checkOutDate(requestDto.getCheckOutDate())
                 .status(Status.New_request)
                 .build();
-        return  requestRepository.save(request);
+        return requestRepository.save(request);
     }
 
     /**
@@ -61,7 +61,7 @@ public class RequestService {
      * @param pageable the pageable
      * @return the page
      */
-    public Page<Request> getAllRequests(Pageable pageable){
+    public Page<Request> getAllRequests(Pageable pageable) {
         return requestRepository.findAll(pageable);
     }
 
@@ -71,7 +71,7 @@ public class RequestService {
      * @param id the id
      * @return the optional of request
      */
-    public Optional<Request> getRequestById(Long id){
+    public Optional<Request> getRequestById(Long id) {
         return requestRepository.findById(id);
     }
 
@@ -82,7 +82,7 @@ public class RequestService {
      * @param status  new status of request
      * @return the request
      */
-    public Request update(Request request, Status status){
+    public Request update(Request request, Status status) {
         request.setStatus(status);
         return requestRepository.save(request);
     }
@@ -93,7 +93,7 @@ public class RequestService {
      * @param client the client
      * @return the request list
      */
-    public List<Request> getRequestsByClient(Client client){
+    public List<Request> getRequestsByClient(Client client) {
         return requestRepository.findRequestByClient(client);
     }
 }

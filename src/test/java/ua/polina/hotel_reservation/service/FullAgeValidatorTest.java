@@ -3,15 +3,12 @@ package ua.polina.hotel_reservation.service;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import javax.validation.ConstraintValidatorContext;
-
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class FullAgeValidatorTest {
     @Mock

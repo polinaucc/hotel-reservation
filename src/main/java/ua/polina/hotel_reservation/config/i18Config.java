@@ -1,4 +1,5 @@
 package ua.polina.hotel_reservation.config;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
@@ -27,6 +28,7 @@ public class i18Config implements WebMvcConfigurer {
         localeChangeInterceptor.setParamName("lang");
         return localeChangeInterceptor;
     }
+
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
