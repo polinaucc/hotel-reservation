@@ -23,32 +23,41 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * Admin controller. This controller is used for admin functions
+ * Admin controller. This controller is used for admin function
+ * processing
  */
 @Controller
 @SessionAttributes("request")
 @RequestMapping("/admin")
 public class AdminController {
     /**
-     * The Description service.
+     * The Description service field
      */
     DescriptionService descriptionService;
+
     /**
-     * The Request service.
+     * The Request service field
      */
     RequestService requestService;
+
     /**
-     * The Room service.
+     * The Room service field
      */
     RoomService roomService;
+
     /**
-     * The Reservation service.
+     * The Reservation service field
      */
     ReservationService reservationService;
+
     /**
-     * Logger
+     * Logger field
      */
     private static final Logger LOGGER = LogManager.getLogger(AdminController.class);
+
+    /**
+     * Resource bundle field for localization error messages
+     */
     private ResourceBundle rb;
 
     /**

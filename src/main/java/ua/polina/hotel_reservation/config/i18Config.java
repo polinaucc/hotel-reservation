@@ -12,7 +12,6 @@ import java.util.Locale;
 
 @Configuration
 public class i18Config implements WebMvcConfigurer {
-
     @Bean
     public LocaleResolver localeResolver() {
         CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
@@ -28,7 +27,6 @@ public class i18Config implements WebMvcConfigurer {
         localeChangeInterceptor.setParamName("lang");
         return localeChangeInterceptor;
     }
-
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

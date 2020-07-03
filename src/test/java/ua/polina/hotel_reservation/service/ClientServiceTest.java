@@ -26,16 +26,12 @@ import static org.mockito.Mockito.*;
 public class ClientServiceTest {
     @Mock
     ClientRepository clientRepository;
-
     @Mock
     UserRepository userRepository;
-
     @InjectMocks
     ClientService clientService;
-
     @Mock
     PasswordEncoder passwordEncoder;
-
     SignUpDto signUpDto;
     User user;
     Client client;

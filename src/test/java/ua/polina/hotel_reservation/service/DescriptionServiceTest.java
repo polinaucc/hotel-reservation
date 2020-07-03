@@ -27,10 +27,8 @@ import static org.mockito.Mockito.*;
 public class DescriptionServiceTest {
     @Mock
     DescriptionRepository descriptionRepository;
-
     @InjectMocks
     DescriptionService descriptionService;
-
     DescriptionDto descriptionDto;
     RequestDto requestDto;
     Description description;

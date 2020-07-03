@@ -26,10 +26,8 @@ import static org.mockito.Mockito.*;
 public class RoomServiceTest {
     @Mock
     RoomReppository roomReppository;
-
     @InjectMocks
     RoomService roomService;
-
     RoomDto roomDto;
     Description description1;
     Description description2;

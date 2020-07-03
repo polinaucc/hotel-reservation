@@ -15,14 +15,15 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The type Request service.
+ * The type Request service. It provides processing data received
+ * from controller or from repository
  *
  * @author Polina Serhiienko
  */
 @Service
 public class RequestService {
     /**
-     * The Request repository.
+     * The Request repository field.
      */
     RequestRepository requestRepository;
 
@@ -37,12 +38,12 @@ public class RequestService {
     }
 
     /**
-     * Save new request.
+     * Method that saves new request.
      *
      * @param requestDto  the request dto
      * @param client      the client
      * @param description the description of the room
-     * @return the request
+     * @return the request, that was saved
      */
     public Request saveNewRequest(RequestDto requestDto, Client client, Description description) {
         Request request = Request.builder()
@@ -56,19 +57,19 @@ public class RequestService {
     }
 
     /**
-     * Get all requests with pagination.
+     * Method gets all requests using pagination.
      *
-     * @param pageable the pageable
-     * @return the page
+     * @param pageable information about page
+     * @return the page with requested data
      */
     public Page<Request> getAllRequests(Pageable pageable) {
         return requestRepository.findAll(pageable);
     }
 
     /**
-     * Get request by id.
+     * Method gets request by id.
      *
-     * @param id the id
+     * @param id request id
      * @return the optional of request
      */
     public Optional<Request> getRequestById(Long id) {
@@ -76,11 +77,11 @@ public class RequestService {
     }
 
     /**
-     * Update request.
+     * Method updates the request.
      *
      * @param request the request
      * @param status  new status of request
-     * @return the request
+     * @return request, that was updated
      */
     public Request update(Request request, Status status) {
         request.setStatus(status);
@@ -88,10 +89,10 @@ public class RequestService {
     }
 
     /**
-     * Get requests by client.
+     * Method gets requests by client.
      *
-     * @param client the client
-     * @return the request list
+     * @param client the client to search
+     * @return the client request list
      */
     public List<Request> getRequestsByClient(Client client) {
         return requestRepository.findRequestByClient(client);

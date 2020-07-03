@@ -13,7 +13,6 @@ import static org.junit.Assert.assertTrue;
 public class FullAgeValidatorTest {
     @Mock
     FullAgeValidator fullAgeValidator;
-
     @Mock
     ConstraintValidatorContext context;
 

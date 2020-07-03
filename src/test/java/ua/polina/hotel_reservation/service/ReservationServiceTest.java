@@ -21,12 +21,9 @@ import static org.mockito.Mockito.*;
 public class ReservationServiceTest {
     Request request;
     Room room;
-
     @Mock
     ReservationRepository reservationRepository;
-
     Reservation reservation;
-
     @InjectMocks
     ReservationService reservationService;
 
