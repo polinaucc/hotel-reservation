@@ -21,8 +21,14 @@ after which the system issues an Invoice to the Client.
 **_Running the project:_**
 1. Clone this project to your local repository
 2. Change _spring.jpa.hibernate.ddl-auto_ in _application.properties_ from _update_ to _create_
+3.  Run scripts from **/resources/db/** folder to insert data
 3. Update database login and password in _application.properties_
-4. Run **-mvn spring-boot:run** from project root folder
+4. Run `mvn spring-boot:run` from project root folder
 5. The prokect will start on 8080 port. Use http://localhost:8080/ to view web application
 
+**_Default users:_**
 
+ROLE | USERNAME | PASSWORD
+---- | -------- | --------
+ADMIN | admin | admin
+CLIENT | test1 | test1
